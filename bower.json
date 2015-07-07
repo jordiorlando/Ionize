@@ -1,0 +1,24 @@
+{
+  "name": "Ionize",
+  "version": "0.0.0",
+  "authors": [
+    "Jordi Orlando <jordi.orlando@d1sc0te.ch>"
+  ],
+  "description": "Keyboard design tools by D1SC0tech",
+  "license": "GPL",
+  "homepage": "ionize.d1sc0te.ch",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-elements": "PolymerElements/iron-elements#~1.0.1",
+    "paper-elements": "PolymerElements/paper-elements#~1.0.1",
+    "file-saver.js": "~1.20150507.2",
+    "page": "visionmedia/page.js#~1.6.3"
+  }
+}

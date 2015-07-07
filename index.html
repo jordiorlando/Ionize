@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="D1SC0tech, keyboard, designer">
+  <meta name="description" content="Ionize is a set of tools for keyboard designers">
+  <meta name="author" content="Jordi Orlando">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ionize</title>
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#5D4037">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Ionize">
+
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="imports.html">
+</head>
+<body unresolved class="fullbleed layout vertical">
+  <span id="browser-sync-binding"></span>
+  <template is="dom-bind" id="app">
+    <paper-drawer-panel id="paperDrawerPanel">
+
+      <paper-header-panel drawer mode="seamed">
+        <!-- Drawer Toolbar -->
+        <paper-toolbar id="drawerToolbar">
+          <div class="title">
+            <iron-icon icon="hardware:keyboard"></iron-icon>
+            <span class="paper-font-title">Ionize</span>
+          </div>
+        </paper-toolbar>
+
+        <!-- Drawer Content -->
+        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+          <paper-item>
+            <a data-route="project" href="/">
+              <iron-icon icon="folder-open"></iron-icon>
+              <span>Project</span>
+            </a>
+          </paper-item>
+          <paper-item>
+            <a data-route="layout" href="/layout">
+              <iron-icon icon="image:view-compact"></iron-icon>
+              <span>Layout</span>
+            </a>
+          </paper-item>
+          <paper-item>
+            <a data-route="keyset" href="/keyset">
+              <iron-icon icon="image:brush"></iron-icon>
+              <span>Keyset</span>
+            </a>
+          </paper-item>
+          <paper-item>
+            <a data-route="firmware" href="/firmware">
+              <iron-icon icon="hardware:memory"></iron-icon>
+              <span>Firmware</span>
+            </a>
+          </paper-item>
+        </paper-menu>
+      </paper-header-panel>
+
+      <paper-scroll-header-panel main class="flex" condenses keep-condensed-header scroll-away-topbar>
+        <!-- Main Toolbar -->
+        <paper-toolbar class="tall" id="mainToolbar">
+          <paper-icon-button class="top" id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+          <div class="top paper-font-display2 app-name">D1SC0tech</div>
+          <span class="top flex"></span>
+          <paper-input label="search"></paper-input>
+          <paper-icon-button class="top" icon="search" on-tap="searchAction"></paper-icon-button>
+
+          <paper-tabs class="middle" selected="3">
+            <paper-tab link>
+    					<a href="http://d1sc0te.ch" class="horizontal center-center layout">home</a>
+    				</paper-tab>
+    				<paper-tab link>
+    					<a href="http://store.d1sc0te.ch" class="horizontal center-center layout">store</a>
+    				</paper-tab>
+    				<paper-tab link>
+    					<a href="http://blog.d1sc0te.ch" class="horizontal center-center layout">blog</a>
+    				</paper-tab>
+            <paper-tab link>
+    					<a href="http://ionize.d1sc0te.ch" class="horizontal center-center layout">ionize</a>
+    				</paper-tab>
+          </paper-tabs>
+
+          <iron-pages class="bottom" attr-for-selected="data-route" selected="{{route}}">
+            <div class="layout horizontal" data-route="project">
+              <paper-button>
+                <iron-icon icon="cloud-upload"></iron-icon>
+                <div class="paper-font-button">Save to Server</div>
+              </paper-button>
+            </div>
+
+            <div class="layout horizontal center" data-route="layout">
+              <paper-button on-tap="saveLayout">
+                <iron-icon icon="file-download"></iron-icon>
+                <div class="paper-font-button">Download JSON</div>
+              </paper-button>
+
+              <paper-button on-tap="loadLayout">
+                <iron-icon icon="file-upload"></iron-icon>
+                <div class="paper-font-button">Upload JSON</div>
+              </paper-button>
+
+              <paper-button on-tap="renderLayout">
+                <iron-icon icon="add"></iron-icon>
+                <div class="paper-font-button">Add key</div>
+              </paper-button>
+            </div>
+
+            <div class="layout horizontal" data-route="keyset">
+              <paper-button on-tap="saveKeyset">
+                <iron-icon icon="file-download"></iron-icon>
+                <div class="paper-font-button">Download JSON</div>
+              </paper-button>
+
+              <paper-button on-tap="loadKeyset">
+                <iron-icon icon="file-upload"></iron-icon>
+                <div class="paper-font-button">Upload JSON</div>
+              </paper-button>
+            </div>
+
+            <div class="layout horizontal" data-route="firmware">
+              <paper-button on-tap="saveFirmware">
+                <iron-icon icon="file-download"></iron-icon>
+                <div class="paper-font-button">Download Code</div>
+              </paper-button>
+
+              <paper-button on-tap="loadFirmware">
+                <iron-icon icon="device:usb"></iron-icon>
+                <div class="paper-font-button">Upload to KB</div>
+              </paper-button>
+            </div>
+          </iron-pages>
+        </paper-toolbar>
+
+        <!-- Main Content -->
+        <div class="content">
+          <iron-pages class="bottom" attr-for-selected="data-route" selected="{{route}}">
+            <div class="layout horizontal" data-route="project">
+
+            </div>
+
+            <div class="layout horizontal" data-route="layout">
+              <div id="kbContainer">
+
+              </div>
+            </div>
+
+            <div class="layout horizontal" data-route="keyset">
+
+            </div>
+
+            <div class="layout horizontal" data-route="firmware">
+
+            </div>
+          </iron-pages>
+        </div>
+      </paper-scroll-header-panel>
+
+    </paper-drawer-panel>
+  </template>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>

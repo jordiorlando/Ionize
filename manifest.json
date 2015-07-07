@@ -1,0 +1,7 @@
+{
+  "name": "Ionize by D1SC0tech",
+  "short_name": "Ionize",
+  "icons": [],
+  "start_url": "/#!/",
+  "display": "standalone"
+}

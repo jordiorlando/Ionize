@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "name": "ION-60",
+    "author": "D1SC0tech",
+    "description": "",
+    "switch": "Cherry",
+    "t": "Red",
+    "l": "White"
+  },
+  "keys": [
+    {
+      "k": "1",
+      "x": 0,
+      "y": 0,
+      "w": 1,
+      "h": 1,
+      "r": 0
+    },
+    {
+      "k": "Q",
+      "x": 1,
+      "y": 1,
+      "w": 1,
+      "h": 1,
+      "r": 0
+    },
+    {
+      "k": "LSFT",
+      "x": 3,
+      "y": 4,
+      "w": 1.5,
+      "h": 1,
+      "r": 0,
+      "t": "Black",
+      "l": "Blue"
+    }
+  ],
+
+  "_comment": "k = key, x = x position, y = y position, w = width, h = height, r = rotation, t = type, l = LED"
+}

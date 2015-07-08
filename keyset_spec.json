@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "name": "Granite",
+    "author": "matt3o",
+    "description": "",
+    "material": "PBT",
+    "legends": "Dye-Sub",
+    "p": "DSA",
+    "f": "blah"
+  },
+  "keys": [
+    {
+      "k": "1",
+      "w": 1,
+      "h": 1,
+      "r": 0,
+      "c": "GKK",
+      "l": [
+        {
+          "t": "1",
+          "a": "center",
+          "j": "bottom",
+          "s": "12",
+          "c": "#000000"
+        },
+        {
+          "t": "!",
+          "a": "center",
+          "j": "top",
+          "s": "12",
+          "c": "#000000"
+        }
+      ]
+    },
+    {
+      "k": "F",
+      "w": 1,
+      "h": 1,
+      "r": 0,
+      "p": "DSA Dish",
+      "c": "GKK",
+      "l": [
+        {
+          "t": "F",
+          "a": "center",
+          "j": "center",
+          "s": "20",
+          "c": "#000000"
+        }
+      ]
+    },
+    {
+      "k": "LSFT",
+      "w": 2.25,
+      "h": 1,
+      "r": 0,
+      "c": "GDE",
+      "l": [
+        {
+          "i": "shift.png",
+          "a": "center",
+          "j": "center",
+          "w": "50%",
+          "h": "50%",
+          "c": "#000000"
+        }
+      ]
+    }
+  ],
+
+  "_comment": "k = key, w = width, h = height, r = rotation, p = profiile, c = color, l = legend, t = text, i = image, a = align, j = justify, s = size, f = font"
+}

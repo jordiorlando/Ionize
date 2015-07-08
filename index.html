@@ -110,7 +110,7 @@
                 <div class="paper-font-button">Upload JSON</div>
               </paper-button>
 
-              <paper-button on-tap="renderLayout">
+              <paper-button on-tap="addKey">
                 <iron-icon icon="add"></iron-icon>
                 <div class="paper-font-button">Add key</div>
               </paper-button>
@@ -144,15 +144,13 @@
 
         <!-- Main Content -->
         <div class="content">
-          <iron-pages class="bottom" attr-for-selected="data-route" selected="{{route}}">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
             <div class="layout horizontal" data-route="project">
 
             </div>
 
             <div class="layout horizontal" data-route="layout">
-              <div id="kbContainer">
-
-              </div>
+              <div id="kbContainer"></div>
             </div>
 
             <div class="layout horizontal" data-route="keyset">

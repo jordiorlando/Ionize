@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "name": "ION-60",
+    "author": "D1SC0tech",
+    "description": ""
+  },
+  "layers": [
+    {
+      "layer": 0,
+      "name": "QWERTY",
+      "keys": []
+    },
+    {
+      "layer": 4,
+      "name": "Colemak",
+      "keys": []
+    }
+  ]
+}

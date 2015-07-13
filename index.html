@@ -110,10 +110,17 @@
                 <div class="paper-font-button">Upload JSON</div>
               </paper-button>
 
+              <paper-button on-tap="loadPreset">
+                <iron-icon icon="arrow-drop-down"></iron-icon>
+                <div class="paper-font-button">Load Preset</div>
+              </paper-button>
+
               <paper-button on-tap="addKey">
                 <iron-icon icon="add"></iron-icon>
                 <div class="paper-font-button">Add key</div>
               </paper-button>
+
+              <paper-slider min="10" max="250" value="100" immediate-value="{{unitSize}}" pin></paper-slider>
             </div>
 
             <div class="layout horizontal" data-route="keyset">
@@ -149,8 +156,8 @@
 
             </div>
 
-            <div class="layout horizontal" data-route="layout">
-              <div id="kbContainer"></div>
+            <div class="layout horizontal" data-route="layout" id="layout">
+
             </div>
 
             <div class="layout horizontal" data-route="keyset">
@@ -168,5 +175,7 @@
   </template>
 
   <script src="scripts/app.js"></script>
+  <script src="scripts/layout.js"></script>
+  <script src="scripts/keyset.js"></script>
 </body>
 </html>

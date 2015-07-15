@@ -20,6 +20,7 @@
     "paper-elements": "PolymerElements/paper-elements#~1.0.1",
     "file-saver.js": "~1.20150507.2",
     "page": "visionmedia/page.js#~1.6.3",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "doT": "~1.0.1"
   }
 }

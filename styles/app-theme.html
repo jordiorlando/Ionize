@@ -150,8 +150,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 0;
 
-    /* Prevent highlighting/selecting text */
+    /* Disable highlighting/selecting text */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -189,6 +190,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     border: 2px solid #BBB;
   }
 
+  .selected {
+    z-index: 1;
+  }
   .selected .keyBG{
     border: 2px solid #666;
   }
@@ -201,25 +205,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   .selected.last .keyMG{
     border: 2px solid #444;
   }
-
-  .DCS .keyFG {
-    background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 100%);
-  }
-  .DSA .keyFG, .SA .keyFG {
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0) 100%);
-  }
-
-  .DCS.SPACE .keyFG, .DSA.SPACE .keyFG, .SA.SPACE .keyFG {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.1) 100%);
-  }
-  .DSA.DISH .keyFG, .SA.DISH .keyFG {
-    background: radial-gradient(circle, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.04) 60%);
-    background-repeat: no-repeat;
-  }
-  /*.BAR .keyBG .keyFG {
-    background-image: url("nub.png");
-    background-position: center 90%;
-  }*/
 
 
 

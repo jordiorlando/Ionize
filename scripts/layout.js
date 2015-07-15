@@ -50,39 +50,67 @@ app.addKey = function() {
   keyHTML.update(numKeys);
 };
 
-app.moveKey = function(dir) {
-  var container = document.querySelector("#layoutContainer");
+app.deleteKey = function() {
   var keys = document.querySelectorAll(".selected");
+
   for (var i = 0; i < keys.length; i++) {
     var key = keys.item(i);
     var k = parseInt(key.id.replace("key_", ""), 10);
-    key = layout.keys[k];
 
-    switch (dir) {
-      case "up":
-        key.y -= app.stepSize;
-        if (key.y < 0) {
-          key.y = 0;
-        }
-        keyHTML.update(k);
-        break;
-      case "down":
-        key.y += app.stepSize;
-        keyHTML.update(k);
-        break;
-      case "left":
-        key.x -= app.stepSize;
-        if (key.x < 0) {
-          key.x = 0;
-        }
-        keyHTML.update(k);
-        break;
-      case "right":
-        key.x += app.stepSize;
-        keyHTML.update(k);
-        break;
+    // Delete the key's html
+    key.remove();
+
+    for (var ii = k + 1; ii < layout.keys.length; ii++) {
+      document.querySelector("#key_" + ii).id = "key_" + (ii - 1);
     }
 
+    // Delete the key in the layout array
+    layout.keys.splice(k, 1);
+    //delete layout.keys[k];
+  }
+
+  //sortLayout();
+};
+
+app.moveKey = function(dir) {
+  var container = document.querySelector("#layoutContainer");
+  var keys = document.querySelectorAll(".selected");
+  var canMove = true;
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = layout.keys[parseInt(keys.item(i).id.replace("key_", ""), 10)];
+    if ((key.x < app.stepSize && dir == "left") || (key.y < app.stepSize && dir == "up")) {
+      canMove = false;
+      break;
+    }
+  }
+
+  if (canMove) {
+    for (var i = 0; i < keys.length; i++) {
+      var k = parseInt(keys.item(i).id.replace("key_", ""), 10);
+      var key = layout.keys[k];
+
+      switch (dir) {
+        case "up":
+          key.y -= app.stepSize;
+          keyHTML.update(k);
+          break;
+        case "down":
+          key.y += app.stepSize;
+          keyHTML.update(k);
+          break;
+        case "left":
+          key.x -= app.stepSize;
+          keyHTML.update(k);
+          break;
+        case "right":
+          key.x += app.stepSize;
+          keyHTML.update(k);
+          break;
+      }
+    }
+
+    //sortLayout();
     resizeLayout();
   }
 };
@@ -108,7 +136,7 @@ var renderLayout = function() {
   }
   container.style.width = (15 * app.unitSize) + "px";
   container.style.height = (5 * app.unitSize) + "px";
-  //container.addEventListener("click", function(){keyHTML.deselectAll();}, false);
+  container.addEventListener("click", keyHTML.onClick, false);
 };
 
 var updateLayout = function() {
@@ -117,11 +145,43 @@ var updateLayout = function() {
   }
 };
 
+var sortLayout = function() {
+  var width = layoutWidth();
+
+  var sortKeys = function(a, b) {
+    return (a.x + (a.y * width)) - (b.x + (b.y * width));
+  };
+
+  layout.keys.sort(sortKeys);
+
+  /*var list = $(".key").get();
+  list.sort(function(a, b) {
+    var c = {}, d = {};
+    c.x = parseInt(a.getAttribute("x"), 10);
+    c.y = parseInt(a.getAttribute("y"), 10);
+    d.x = parseInt(b.getAttribute("x"), 10);
+    d.y = parseInt(b.getAttribute("y"), 10);
+    return sortKeys(c, d);
+  });
+  for (var i = 0; i < list.length; i++) {
+    list[i].parentNode.appendChild(list[i]);
+    list[i].id = "key_" + i;
+  }*/
+};
+
 var resizeLayout = function() {
   var container = document.querySelector("#layoutContainer");
 
-  container.style.width = (Math.max.apply(Math, layout.keys.map(function(key){return key.x + key.w;})) * app.unitSize) + "px";
-  container.style.height = (Math.max.apply(Math, layout.keys.map(function(key){return key.y + key.h;})) * app.unitSize) + "px";
+  container.style.width = (layoutWidth() * app.unitSize) + "px";
+  container.style.height = (layoutHeight() * app.unitSize) + "px";
+};
+
+var layoutWidth = function() {
+  return Math.max.apply(Math, layout.keys.map(function(key){return key.x + key.w;}));
+};
+
+var layoutHeight = function() {
+  return Math.max.apply(Math, layout.keys.map(function(key){return key.y + key.h;}));
 };
 
 var keyHTML = {};
@@ -152,6 +212,7 @@ keyHTML.create = function(k) {
   keyFG.style.borderRadius = (app.unitSize / 10) + "px";
 
   var keyName = document.createElement("div");
+  //keyName.className = "keyName";
   keyName.style.textAlign = "center";
   keyName.innerHTML = "NEW<br>" + k;
 
@@ -160,8 +221,6 @@ keyHTML.create = function(k) {
   keyBG.appendChild(keyMG);
   html.appendChild(keyBG);
 
-  keyBG.addEventListener("click", function(){keyHTML.onClick(k);}, false);
-
   return html;
 };
 
@@ -169,7 +228,9 @@ keyHTML.update = function(k) {
   var key = layout.keys[k];
   var html = document.querySelector("#key_" + k);
   html.style.left = ((key.x + 0.25) * app.unitSize) + "px";
+  //html.setAttribute("x", key.x);
   html.style.top = ((key.y + 0.25) * app.unitSize) + "px";
+  //html.setAttribute("y", key.y);
   html.style.width = (key.w * app.unitSize) + "px";
   html.style.height = (key.h * app.unitSize) + "px";
 
@@ -189,67 +250,74 @@ keyHTML.update = function(k) {
   keyName.innerHTML = key.k;
 };
 
-keyHTML.onClick = function(id) {
-  var key = document.querySelector("#key_" + id);
-  var lastKey = document.querySelector(".last");
+keyHTML.onClick = function(event) {
+  var key = event.target.closest(".keyBG");
 
-  if (app.shiftKey) {
-    if (lastKey !== null) {
-      // Get index of previous key
-      var lastID = parseInt(lastKey.id.replace("key_", ""), 10);
+  if (key !== null) {
+    key = key.parentNode;
+    var id = parseInt(key.id.replace("key_", ""), 10);
+    var lastKey = document.querySelector(".last");
 
-      // Remove .last from previous key
-      lastKey.className = lastKey.className.replace(" last", "");
+    if (app.shiftKey) {
+      if (lastKey !== null) {
+        // Get index of previous key
+        var lastID = parseInt(lastKey.id.replace("key_", ""), 10);
 
-      // Select all the keys in between
-      if (lastID <= id) {
-        for (var i = lastID; i <= id; i++) {
-          var currKey = document.querySelector("#key_" + i);
-          if (currKey.className.indexOf("selected") == -1) {
-            currKey.className += " selected";
+        // Remove .last from previous key
+        lastKey.className = lastKey.className.replace(" last", "");
+
+        // Select all the keys in between
+        if (lastID <= id) {
+          for (var i = lastID; i <= id; i++) {
+            var currKey = document.querySelector("#key_" + i);
+            if (currKey.className.indexOf("selected") == -1) {
+              currKey.className += " selected";
+            }
           }
-        }
-      } else {
-        for (var i = lastID; i >= id; i--) {
-          var currKey = document.querySelector("#key_" + i);
-          if (currKey.className.indexOf("selected") == -1) {
-            currKey.className += " selected";
+        } else {
+          for (var i = lastID; i >= id; i--) {
+            var currKey = document.querySelector("#key_" + i);
+            if (currKey.className.indexOf("selected") == -1) {
+              currKey.className += " selected";
+            }
           }
         }
       }
-    }
 
-    // Add .selected.last to the clicked key
-    if (key.className.indexOf("selected") == -1) {
-      key.className += " selected";
-    }
-    if (key.className.indexOf("last") == -1) {
-      key.className += " last";
-    }
-  } else if (app.controlKey) {
-    // Add .selected.last to the clicked key
-    if (key.className.indexOf("selected") == -1) {
-      key.className += " selected";
+      // Add .selected.last to the clicked key
+      if (key.className.indexOf("selected") == -1) {
+        key.className += " selected";
+      }
       if (key.className.indexOf("last") == -1) {
         key.className += " last";
       }
-      if (lastKey !== null) {
-        // Remove .last from previous key
-        lastKey.className = lastKey.className.replace(" last", "");
+    } else if (app.controlKey) {
+      // Add .selected.last to the clicked key
+      if (key.className.indexOf("selected") == -1) {
+        key.className += " selected";
+        if (key.className.indexOf("last") == -1) {
+          key.className += " last";
+        }
+        if (lastKey !== null) {
+          // Remove .last from previous key
+          lastKey.className = lastKey.className.replace(" last", "");
+        }
+      } else {
+        key.className = key.className.replace(" last", "").replace(" selected", "");
       }
     } else {
-      key.className = key.className.replace(" last", "").replace(" selected", "");
+      keyHTML.deselectAll();
+
+      // Add .selected.last to the clicked key
+      if (key.className.indexOf("selected") == -1) {
+        key.className += " selected";
+      }
+      if (key.className.indexOf("last") == -1) {
+        key.className += " last";
+      }
     }
   } else {
     keyHTML.deselectAll();
-
-    // Add .selected.last to the clicked key
-    if (key.className.indexOf("selected") == -1) {
-      key.className += " selected";
-    }
-    if (key.className.indexOf("last") == -1) {
-      key.className += " last";
-    }
   }
 };
 

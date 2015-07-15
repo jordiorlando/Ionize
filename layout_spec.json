@@ -1,10 +1,11 @@
+"long":
 {
   "type": "layout",
   "meta": {
     "name": "ION-60",
-    "author": "D1SC0tech",
-    "description": "",
-    "switch": "Cherry",
+    "auth": "D1SC0tech",
+    "desc": "blah",
+    "sw": "Cherry",
     "t": "Red",
     "l": "White"
   },
@@ -37,5 +38,18 @@
     }
   ],
 
-  "_comment": "k = key, x = x position, y = y position, w = width, h = height, r = rotation, t = type, l = LED"
+  "_comment": "k = key, x = x position, y = y position, w = width, h = height, r = rotation, t = type, l = LED, sw = switch"
 }
+
+"short":
+[
+  "layout",
+  "0.0.1",
+  {"name":"ION-60","auth":"D1SC0tech","desc":"blah","sw":"Cherry","t":"Red","l":"White"},
+
+  ["`","1","2","3","4","5","6","7","8","9","0","-","=",{"w":2},"BSPC"],
+  [{"w":1.5},"TAB",{"w":1},"Q","W","E","R","T","Y","U","I","O","P","[","]",{"w":1.5},"\\"],
+  [{"w":1.75},"CAPS",{"w":1},"A","S","D","F","G","H","J","K","L",";","'",{"w":2.25},"ENT"],
+  [{"w":2.25},"LSFT",{"w":1},"Z","X","C","V","B","N","M",",",".","/",{"w":2.75},"RSFT"],
+  [{"w":1.25},"LCTL","LGUI","LALT",{"w":6.25,"t":"Black"},"SPC",{"w":1.25,"t":"Red"},"RALT","RGUI","MENU","LCTL"]
+]

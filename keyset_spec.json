@@ -1,73 +1,223 @@
+"defaults":
 {
   "type": "keyset",
+  "ver": "*current_version*",
   "meta": {
-    "name": "Granite",
-    "author": "matt3o",
-    "description": "",
-    "material": "PBT",
-    "legends": "Dye-Sub",
-    "p": "DSA",
-    "f": "blah"
+    "name": null,
+    "auth": null,
+    "desc": null,
+    "key": {
+      "s": "Cherry",
+      "p": null,
+      "r": null,
+      "m": null,
+      "c": "#FFF"
+    },
+    "lgnd": {
+      "l": null,
+      "f": "Arial?",
+      "fs": "12?",
+      "a": "center",
+      "j": "center",
+      "lc": "#000"
+    }
   },
   "keys": [
     {
-      "k": "1",
-      "w": 1,
-      "h": 1,
-      "r": 0,
-      "c": "GKK",
-      "l": [
-        {
-          "t": "1",
-          "a": "center",
-          "j": "bottom",
-          "s": "12",
-          "c": "#000000"
-        },
-        {
-          "t": "!",
-          "a": "center",
-          "j": "top",
-          "s": "12",
-          "c": "#000000"
-        }
-      ]
-    },
-    {
-      "k": "F",
-      "w": 1,
-      "h": 1,
-      "r": 0,
-      "p": "DSA Dish",
-      "c": "GKK",
-      "l": [
-        {
-          "t": "F",
-          "a": "center",
-          "j": "center",
-          "s": "20",
-          "c": "#000000"
-        }
-      ]
-    },
-    {
-      "k": "LSFT",
-      "w": 2.25,
-      "h": 1,
-      "r": 0,
-      "c": "GDE",
-      "l": [
-        {
-          "i": "shift.png",
-          "a": "center",
-          "j": "center",
-          "w": "50%",
-          "h": "50%",
-          "c": "#000000"
-        }
-      ]
+      "key": {
+        "k": null,
+        "w": 1,
+        "h": 1,
+        "x2": 0,
+        "y2": 0,
+        "w2": 1,
+        "h2": 1,
+        "sp": false,
+        "stem": [
+          {
+            "s": "meta.key.s",
+            "x": 0,
+            "y": 0
+          }
+        ],
+        "p": "meta.key.p",
+        "r": "meta.key.r",
+        "m": "meta.key.m",
+        "c": "meta.key.c",
+      },
+      "lgnd": {
+        "l": "meta.lgnd.l",
+        "lgnds": [
+          {
+            "t": "keys.key.k",
+            "a": "meta.lgnd.a",
+            "j": "meta.lgnd.j",
+            "f": "meta.lgnd.f",
+            "fs": "meta.lgnd.fs",
+            "lc": "meta.lgnd.lc"
+          },
+          {
+            "i": null,
+            "a": "center",
+            "j": "center",
+            "is": "50%?",
+            "lc": "meta.lgnd.lc"
+          }
+        ]
+      }
     }
   ],
 
-  "_comment": "k = key, w = width, h = height, r = rotation, p = profiile, c = color, l = legend, t = text, i = image, a = align, j = justify, s = size, f = font"
+  "_comment": "a = align, c = color, fs = font size, i = image, j = justify, k = key, l = legend (Dye Sub, Double Shot), m = material (ABS, PBT), p = profiile (DSA, Cherry, G20), r = row, s = switch/stem, t = text"
 }
+
+"short":
+[
+  "keyset",
+  "0.0.1",
+  {"name":"Granite","auth":"matt3o","desc":"Minimal PBT DSA keyset with dye-sub legends","key":{"p":"DSA","m":"PBT"},"lgnd":{"l":"Dye-Sub","f":"blah"}},
+
+  [
+    {"name":"Common Kit","c":"GDE","fs":"16"},
+    "F5","F6","F7","F8",
+    {"k":"GRV","lgnds":[{"t":"`","j":"bottom"},{"t":"~","j":"top"}]},
+    {"k":"BSLS","w":1.5,"lgnds":[{"t":"\\","j":"bottom"},{"t":"|","j":"top"}]},
+
+    {"fs":"24"},
+    {"k":"UP","lgnds":{"t":"&AND;"}},
+    {"k":"DOWN","lgnds":{"t":"&OR;"}},
+    {"k":"LEFT","lgnds":{"t":"<"}},
+    {"k":"RGHT","lgnds":{"t":">"}},
+
+    {"c":"GKK","fs":"16"},
+    "F1","F2","F3","F4","F9","F10","F11","F12",
+    {"k":"GRV","lgnds":[{"t":"`","j":"bottom"},{"t":"~","j":"top"}]},
+    {"k":"1","lgnds":[{"t":"1","j":"bottom"},{"t":"!","j":"top"}]},
+    {"k":"2","lgnds":[{"t":"2","j":"bottom"},{"t":"@","j":"top"}]},
+    {"k":"3","lgnds":[{"t":"3","j":"bottom"},{"t":"#","j":"top"}]},
+    {"k":"4","lgnds":[{"t":"4","j":"bottom"},{"t":"$","j":"top"}]},
+    {"k":"5","lgnds":[{"t":"5","j":"bottom"},{"t":"%","j":"top"}]},
+    {"k":"6","lgnds":[{"t":"6","j":"bottom"},{"t":"^","j":"top"}]},
+    {"k":"7","lgnds":[{"t":"7","j":"bottom"},{"t":"&","j":"top"}]},
+    {"k":"8","lgnds":[{"t":"8","j":"bottom"},{"t":"*","j":"top"}]},
+    {"k":"9","lgnds":[{"t":"9","j":"bottom"},{"t":"(","j":"top"}]},
+    {"k":"0","lgnds":[{"t":"0","j":"bottom"},{"t":")","j":"top"}]},
+    {"k":"MINS","lgnds":[{"t":"-","j":"bottom"},{"t":"_","j":"top"}]},
+    {"k":"EQL","lgnds":[{"t":"=","j":"bottom"},{"t":"+","j":"top"}]},
+    {"k":"LBRC","lgnds":[{"t":"[","j":"bottom"},{"t":"{","j":"top"}]},
+    {"k":"RBRC","lgnds":[{"t":"]","j":"bottom"},{"t":"}","j":"top"}]},
+    {"k":"BSLS","w":1.5,"lgnds":[{"t":"\\","j":"bottom"},{"t":"|","j":"top"}]},
+    {"k":"SCLN","lgnds":[{"t":";","j":"bottom"},{"t":":","j":"top"}]},
+    {"k":"QUOT","lgnds":[{"t":"'","j":"bottom"},{"t":"\"","j":"top"}]},
+    {"k":"COMM","lgnds":[{"t":",","j":"bottom"},{"t":"<","j":"top"}]},
+    {"k":"DOT","lgnds":[{"t":".","j":"bottom"},{"t":">","j":"top"}]},
+    {"k":"SLSH","lgnds":[{"t":"/","j":"bottom"},{"t":"?","j":"top"}]},
+
+    {"fs":"24"},
+    "Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M",
+    {"k":"F","p":"DSA DISH"},
+    {"k":"J","p":"DSA DISH"},
+
+    {"k":"SPC","w":6.25}
+  ],
+  [
+    {"name":"Modifier Keys","c":"GDE","fs":"16"},
+    "ESC","INS","DEL","HOME","END","PGUP","PGDN",
+    {"K":"PSCR","lgnds":{"t":"PRINT SCREEN"}},
+    {"K":"SLCK","lgnds":{"t":"SCROLL LOCK"}},
+    {"K":"PAUS","lgnds":{"t":"PAUSE BREAK"}},
+
+    {"w":1.25},
+    "MENU","FN","PN",
+    {"K":"RSFT","lgnds":{"t":"SHIFT"}},
+    {"K":"LCTL","lgnds":{"t":"CTRL"}},
+    {"K":"RCTL","lgnds":{"t":"CTRL"}},
+    {"K":"LGUI","lgnds":{"t":"SUPER"}},
+    {"K":"RGUI","lgnds":{"t":"SUPER"}},
+    {"K":"LALT","lgnds":{"t":"ALT"}},
+    {"K":"RALT","lgnds":{"t":"ALT"}},
+
+    {"w":1.5},
+    "TAB",
+
+    {"w":1.75},
+    {"K":"CAPS","lgnds":{"t":"CAPS LOCK"}},
+    {"K":"CAPS","w":1.25,"w2":1.75,"sp":true,"lgnds":{"t":"CAPS LOCK"}},
+
+    {"w":2},
+    {"K":"BSPC","lgnds":{"t":"BACKSPACE"}},
+
+    {"w":2.25},
+    {"K":"ENT","lgnds":{"t":"ENTER"}},
+    {"K":"LSFT","lgnds":{"t":"SHIFT"}},
+
+    {"w":2.75},
+    {"K":"RSFT","lgnds":{"t":"SHIFT"}}
+  ],
+  [
+    {"name":"Text Pro Modifiers","c":"GDE","fs":"16"},
+    "FN","FN","MENU","TAB"
+    {"K":"LCTL","lgnds":{"t":"CTRL"}},
+    {"K":"RCTL","lgnds":{"t":"CTRL"}},
+    {"K":"LALT","lgnds":{"t":"ALT"}},
+    {"K":"RALT","lgnds":{"t":"ALT"}},
+    {"K":"LGUI","lgnds":{"t":"SUPER"}},
+    {"K":"RGUI","lgnds":{"t":"SUPER"}},
+    {"K":"BSPC","lgnds":{"t":"BACK SPACE"}},
+    {"K":"RALT","lgnds":{"t":"ALT GR"}},
+
+    {"w":1.25},
+    "FN",
+    {"K":"CAPS","lgnds":{"t":"CAPS LOCK"}},
+    {"K":"RALT","lgnds":{"t":"ALT GR"}},
+
+    {"w":1.5},
+    "FN",
+    {"K":"LCTL","lgnds":{"t":"CONTROL"}},
+    {"K":"RCTL","lgnds":{"t":"CONTROL"}},
+    {"K":"LALT","lgnds":{"t":"ALT"}},
+    {"K":"RALT","lgnds":{"t":"ALT"}},
+    {"K":"CAPS","lgnds":{"t":"CAPS LOCK"}},
+    {"K":"BSPC","lgnds":{"t":"BACK SPACE"}},
+
+    {"w":1.75},
+    "FN",
+    {"K":"LSFT","lgnds":{"t":"SHIFT"}},
+    {"K":"LCTL","lgnds":{"t":"CONTROL"}},
+    {"K":"LCTL","w":1.25,"w2":1.75,"sp":true,"lgnds":{"t":"CONTROL"}}
+  ],
+  [
+    {"name":"Numpad","c":"GDE","fs":"24"},
+    {"K":"PPLS","lgnds":{"t":"+"}},
+    {"K":"PMNS","lgnds":{"t":"−"}},
+    {"K":"PAST","lgnds":{"t":"×"}},
+    {"K":"PSLS","lgnds":{"t":"÷"}},
+    {"K":"PEQL","lgnds":{"t":"="}},
+
+    {"fs":"16"},
+    {"K":"NLCK","lgnds":{"t":"NUM LOCK"}},
+
+    {"h":2},
+    {"K":"PENT","lgnds":{"t":"ENTER"}},
+
+    {"fs":"24"},
+    {"K":"PPLS","lgnds":{"t":"+"}},
+
+    {"c":"GKK","h":1},
+    {"K":"P1","lgnds":{"t":"1"}},
+    {"K":"P2","lgnds":{"t":"2"}},
+    {"K":"P3","lgnds":{"t":"3"}},
+    {"K":"P4","lgnds":{"t":"4"}},
+    {"K":"P5","p":"DSA DISH","lgnds":{"t":"5"}},
+    {"K":"P6","lgnds":{"t":"6"}},
+    {"K":"P7","lgnds":{"t":"7"}},
+    {"K":"P8","lgnds":{"t":"8"}},
+    {"K":"P9","lgnds":{"t":"9"}},
+    {"K":"P0","lgnds":{"t":"0"}},
+    {"K":"TODO","lgnds":{"t":"00"}},
+    {"K":"PDOT","lgnds":{"t":"."}},
+
+    {"w":2},
+    {"K":"P0","lgnds":{"t":"0"}}
+  ]
+]

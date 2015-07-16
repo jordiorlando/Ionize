@@ -13,7 +13,14 @@
   },
   "keys": [
     [
-      "horizontal",
+      {
+        "mode": "horizontal",
+        "x": 0,
+        "y": 0,
+        "r": 0,
+        "rx": 0,
+        "ry": 0
+      },
       {
         "k": null,
         "x": null,

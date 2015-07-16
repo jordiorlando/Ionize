@@ -19,6 +19,7 @@ app.loadPreset = function() {
     renderLayout();
   });
 
+  document.querySelector("#saveLayout").removeAttribute("disabled");
   document.querySelector("#addKey").removeAttribute("disabled");
 };
 
@@ -35,14 +36,14 @@ app.addKey = function() {
   var container = document.querySelector("#layoutContainer");
   var numKeys = layout.keys.length;
   var lastKey = layout.keys[numKeys - 1];
-  if ((lastKey.swtc.x + lastKey.cap.w) > (layoutWidth() - 1)) {
-    key.swtc.x = 0;
-    key.swtc.y = lastKey.swtc.y + 1;
+  if ((lastKey.x + lastKey.w) > (layoutWidth() - 1)) {
+    key.x = 0;
+    key.y = lastKey.y + 1;
 
-    container.style.height = ((key.swtc.y + key.cap.h) * app.unitSize) + "px";
+    container.style.height = ((key.y + key.h) * app.unitSize) + "px";
   } else {
-    key.swtc.x = lastKey.swtc.x + lastKey.cap.w;
-    key.swtc.y = lastKey.swtc.y;
+    key.x = lastKey.x + lastKey.w;
+    key.y = lastKey.y;
   }
 
   //key.k = "NEW<br>" + numKeys;
@@ -84,7 +85,7 @@ app.moveKey = function(dir) {
 
   for (var i = 0; i < keys.length; i++) {
     var key = layout.keys[parseInt(keys.item(i).id.replace("key_", ""), 10)];
-    if ((key.swtc.x < app.stepSize && dir == "left") || (key.swtc.y < app.stepSize && dir == "up")) {
+    if ((key.x < app.stepSize && dir == "left") || (key.y < app.stepSize && dir == "up")) {
       canMove = false;
       break;
     }
@@ -97,19 +98,19 @@ app.moveKey = function(dir) {
 
       switch (dir) {
         case "up":
-          key.swtc.y -= app.stepSize;
+          key.y -= app.stepSize;
           keyHTML.update(k);
           break;
         case "down":
-          key.swtc.y += app.stepSize;
+          key.y += app.stepSize;
           keyHTML.update(k);
           break;
         case "left":
-          key.swtc.x -= app.stepSize;
+          key.x -= app.stepSize;
           keyHTML.update(k);
           break;
         case "right":
-          key.swtc.x += app.stepSize;
+          key.x += app.stepSize;
           keyHTML.update(k);
           break;
       }
@@ -125,7 +126,7 @@ app.moveKey = function(dir) {
 var serialize = function(obj) {
   var simple = [];
   simple.push(obj.meta);
-  simple.push([]);
+  simple.push([[]]);
 
   var defaults = {};
   defaults.s = obj.meta.s;
@@ -136,67 +137,79 @@ var serialize = function(obj) {
   defaults.w = 1;
   defaults.h = 1;
 
+  var row = 0;
+
   for (var k in obj.keys) {
     var key = obj.keys[k];
     var vals = {};
 
-    if (key.swtc.s !== defaults.s) {
-      vals.s = key.swtc.s;
+    if (key.s !== defaults.s) {
+      vals.s = key.s;
       defaults.s = vals.s;
     }
-    if (key.swtc.t !== defaults.t) {
-      vals.t = key.swtc.t;
+    if (key.t !== defaults.t) {
+      vals.t = key.t;
       defaults.t = vals.t;
     }
-    if (key.swtc.l !== defaults.l) {
-      vals.l = key.swtc.l;
+    if (key.l !== defaults.l) {
+      vals.l = key.l;
       defaults.l = vals.l;
     }
-    if (key.stab.st !== defaults.st) {
-      vals.st = key.stab.st;
+    if (key.st !== defaults.st) {
+      vals.st = key.st;
       defaults.st = vals.st;
     }
-    if (key.swtc.r !== defaults.r) {
-      vals.r = key.swtc.r;
+    if (key.r !== defaults.r) {
+      vals.r = key.r;
       defaults.r = vals.r;
     }
-    if (key.cap.w !== defaults.w) {
-      vals.w = key.cap.w;
+    if (key.w !== defaults.w) {
+      vals.w = key.w;
       defaults.w = vals.w;
     }
-    if (key.cap.h !== defaults.h) {
-      vals.h = key.cap.h;
+    if (key.h !== defaults.h) {
+      vals.h = key.h;
       defaults.h = vals.h;
     }
 
-    if (Object.keys(vals).length !== 0) {
-      simple[1].push(vals);
+    if (Object.keys(vals).length > 0) {
+      simple[1][row].push(vals);
     }
 
     vals = {};
-    vals.k = key.swtc.k;
-    vals.x = key.swtc.x;
-    vals.y = key.swtc.y;
-    if (key.cap.x2 !== 0) {
-      vals.x2 = key.cap.x2;
+    vals.k = key.k;
+    if ((k == 0) && (key.x == 0) && (key.y == 0)) {
+
+    } else if ((simple[1][row].length > 0) && (key.x == (obj.keys[k - 1].x + obj.keys[k - 1].w)) && (key.y == obj.keys[k - 1].y)) {
+
+    } else {
+      vals.x = key.x;
+      vals.y = key.y;
     }
-    if (key.cap.y2 !== 0) {
-      vals.y2 = key.cap.y2;
+    if (key.x2 !== 0) {
+      vals.x2 = key.x2;
     }
-    if (key.cap.w2 !== key.cap.w) {
-      vals.w2 = key.cap.w2;
+    if (key.y2 !== 0) {
+      vals.y2 = key.y2;
     }
-    if (key.cap.h2 !== key.cap.h) {
-      vals.h2 = key.cap.h2;
+    if (key.w2 !== key.w) {
+      vals.w2 = key.w2;
     }
-    if (key.stab.sw !== key.cap.w) {
-      vals.sw = key.stab.sw;
+    if (key.h2 !== key.h) {
+      vals.h2 = key.h2;
     }
-    if (key.stab.sr !== key.swtc.r) {
-      vals.sr = key.stab.sr;
+    if (key.sw !== key.w) {
+      vals.sw = key.sw;
+    }
+    if (key.sr !== key.r) {
+      vals.sr = key.sr;
     }
 
-    simple[1].push(vals);
+    if (Object.keys(vals).length > 1) {
+      simple[1][row].push(vals);
+    } else {
+      simple[1][row].push(key.k);
+    }
   }
 
   //return JSON.stringify(obj, null, 2);
@@ -259,11 +272,11 @@ var resizeLayout = function() {
 };
 
 var layoutWidth = function() {
-  return Math.max.apply(Math, layout.keys.map(function(key){return key.swtc.x + key.swtc.w;}));
+  return Math.max.apply(Math, layout.keys.map(function(key){return key.x + key.w;}));
 };
 
 var layoutHeight = function() {
-  return Math.max.apply(Math, layout.keys.map(function(key){return key.swtc.y + key.swtc.h;}));
+  return Math.max.apply(Math, layout.keys.map(function(key){return key.y + key.h;}));
 };
 
 var keyHTML = {};
@@ -309,27 +322,27 @@ keyHTML.create = function(k) {
 keyHTML.update = function(k) {
   var key = layout.keys[k];
   var html = document.querySelector("#key_" + k);
-  html.style.left = ((key.swtc.x + 0.25) * app.unitSize) + "px";
-  //html.setAttribute("x", key.swtc.x);
-  html.style.top = ((key.swtc.y + 0.25) * app.unitSize) + "px";
-  //html.setAttribute("y", key.swtc.y);
-  html.style.width = (key.cap.w * app.unitSize) + "px";
-  html.style.height = (key.cap.h * app.unitSize) + "px";
+  html.style.left = ((key.x + 0.25) * app.unitSize) + "px";
+  //html.setAttribute("x", key.x);
+  html.style.top = ((key.y + 0.25) * app.unitSize) + "px";
+  //html.setAttribute("y", key.y);
+  html.style.width = (key.w * app.unitSize) + "px";
+  html.style.height = (key.h * app.unitSize) + "px";
 
   var keyBG = html.firstElementChild;
-  keyBG.style.width = ((key.cap.w * app.unitSize) - (app.unitSize * 2.5 / 75)) + "px";
-  keyBG.style.height = ((key.cap.h * app.unitSize) - (app.unitSize * 2.5 / 75)) + "px";
+  keyBG.style.width = ((key.w * app.unitSize) - (app.unitSize * 2.5 / 75)) + "px";
+  keyBG.style.height = ((key.h * app.unitSize) - (app.unitSize * 2.5 / 75)) + "px";
 
   var keyMG = keyBG.firstElementChild;
-  keyMG.style.width = ((key.cap.w * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
-  keyMG.style.height = ((key.cap.h * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
+  keyMG.style.width = ((key.w * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
+  keyMG.style.height = ((key.h * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
 
   var keyFG = keyMG.firstElementChild;
-  keyFG.style.width = ((key.cap.w * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
-  keyFG.style.height = ((key.cap.h * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
+  keyFG.style.width = ((key.w * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
+  keyFG.style.height = ((key.h * app.unitSize) - (app.unitSize * 20 / 75)) + "px";
 
   var keyName = keyFG.firstElementChild;
-  keyName.innerHTML = key.swtc.k;
+  keyName.innerHTML = key.k;
 };
 
 keyHTML.onClick = function(event) {
@@ -346,57 +359,37 @@ keyHTML.onClick = function(event) {
         var lastID = parseInt(lastKey.id.replace("key_", ""), 10);
 
         // Remove .last from previous key
-        lastKey.className = lastKey.className.replace(" last", "");
+        lastKey.classList.remove("last");
+
+        // Swap the values
+        if (lastID > id) {
+          var tmp = id;
+          id = lastID;
+          lastID = tmp;
+        }
 
         // Select all the keys in between
-        if (lastID <= id) {
-          for (var i = lastID; i <= id; i++) {
-            var currKey = document.querySelector("#key_" + i);
-            if (currKey.className.indexOf("selected") == -1) {
-              currKey.className += " selected";
-            }
-          }
-        } else {
-          for (var i = lastID; i >= id; i--) {
-            var currKey = document.querySelector("#key_" + i);
-            if (currKey.className.indexOf("selected") == -1) {
-              currKey.className += " selected";
-            }
-          }
+        for (var i = lastID; i <= id; i++) {
+          var currKey = document.querySelector("#key_" + i);
+          currKey.classList.add("selected");
         }
       }
 
       // Add .selected.last to the clicked key
-      if (key.className.indexOf("selected") == -1) {
-        key.className += " selected";
-      }
-      if (key.className.indexOf("last") == -1) {
-        key.className += " last";
-      }
+      key.classList.add("selected", "last");
     } else if (app.controlKey) {
       // Add .selected.last to the clicked key
-      if (key.className.indexOf("selected") == -1) {
-        key.className += " selected";
-        if (key.className.indexOf("last") == -1) {
-          key.className += " last";
-        }
+      if (key.classList.toggle("last", key.classList.toggle("selected"))) {
+        // Remove .last from previous key
         if (lastKey !== null) {
-          // Remove .last from previous key
-          lastKey.className = lastKey.className.replace(" last", "");
+          lastKey.classList.remove("last");
         }
-      } else {
-        key.className = key.className.replace(" last", "").replace(" selected", "");
       }
     } else {
       keyHTML.deselectAll();
 
       // Add .selected.last to the clicked key
-      if (key.className.indexOf("selected") == -1) {
-        key.className += " selected";
-      }
-      if (key.className.indexOf("last") == -1) {
-        key.className += " last";
-      }
+      key.classList.add("selected", "last");
     }
 
     if (document.querySelector(".selected") !== null) {
@@ -412,7 +405,7 @@ keyHTML.onClick = function(event) {
 keyHTML.deselectAll = function() {
   var keys = document.querySelectorAll(".selected");
   for (var i = 0; i < keys.length; i++) {
-    keys.item(i).className = keys.item(i).className.replace(" last", "").replace(" selected", "");
+    keys.item(i).classList.remove("selected", "last");
   }
 
   document.querySelector("#deleteKey").setAttribute("disabled");

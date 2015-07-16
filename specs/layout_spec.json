@@ -1,44 +1,38 @@
 "long":
 {
-  "type": "layout",
   "meta": {
-    "name": "ION-60",
-    "auth": "D1SC0tech",
-    "desc": "blah",
-    "sw": "Cherry",
-    "t": "Red",
-    "l": "White"
+    "type": "layout",
+    "ver": "*current_version*",
+    "name": null,
+    "auth": null,
+    "desc": null,
+    "s": null,
+    "t": null,
+    "l": null,
+    "st": null
   },
   "keys": [
     {
-      "k": "1",
-      "x": 0,
-      "y": 0,
+      "k": null,
+      "x": null,
+      "y": null,
       "w": 1,
       "h": 1,
-      "r": 0
-    },
-    {
-      "k": "Q",
-      "x": 1,
-      "y": 1,
-      "w": 1,
-      "h": 1,
-      "r": 0
-    },
-    {
-      "k": "LSFT",
-      "x": 3,
-      "y": 4,
-      "w": 1.5,
-      "h": 1,
+      "x2": 0,
+      "y2": 0,
+      "w2": 1,
+      "h2": 1,
       "r": 0,
-      "t": "Black",
-      "l": "Blue"
+      "s": "meta.s",
+      "t": "meta.t",
+      "l": "meta.l",
+      "st": "meta.st",
+      "sw": "keys.w",
+      "sr": "keys.r"
     }
   ],
 
-  "_comment": "k = key, x = x position, y = y position, w = width, h = height, r = rotation, t = type, l = LED, sw = switch"
+  "_comment": "c = color, h = height, k = key, l = LED, r = rotation, w = width, x = x position, y = y position, s = switch, t = stab type"
 }
 
 "short":

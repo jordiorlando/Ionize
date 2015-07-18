@@ -1,18 +1,16 @@
 "defaults":
 {
-  "type": "keyset",
-  "ver": "*current_version*",
   "meta": {
+    "type": "keyset",
+    "ver": "*current_version*",
     "name": null,
     "auth": null,
     "desc": null,
-    "key": {
-      "s": "Cherry",
-      "p": null,
-      "r": null,
-      "m": null,
-      "c": "#FFF"
-    },
+    "s": null,
+    "p": null,
+    "r": null,
+    "m": null,
+    "c": "#FFF",
     "lgnd": {
       "l": null,
       "f": "Arial?",
@@ -24,32 +22,30 @@
   },
   "keys": [
     {
-      "key": {
-        "k": null,
-        "w": 1,
-        "h": 1,
-        "x2": 0,
-        "y2": 0,
-        "w2": 1,
-        "h2": 1,
-        "sp": false,
-        "stem": [
-          {
-            "s": "meta.key.s",
-            "x": 0,
-            "y": 0
-          }
-        ],
-        "p": "meta.key.p",
-        "r": "meta.key.r",
-        "m": "meta.key.m",
-        "c": "meta.key.c",
-      },
+      "k": null,
+      "w": 1,
+      "h": 1,
+      "x2": 0,
+      "y2": 0,
+      "w2": 1,
+      "h2": 1,
+      "stp": false,
+      "p": "meta.p",
+      "r": "meta.r",
+      "m": "meta.m",
+      "c": "meta.c",
+      "stms": [
+        {
+          "s": "meta.s",
+          "x": 0,
+          "y": 0
+        }
+      ],
       "lgnd": {
         "l": "meta.lgnd.l",
         "lgnds": [
           {
-            "t": "keys.key.k",
+            "t": "keys.k",
             "a": "meta.lgnd.a",
             "j": "meta.lgnd.j",
             "f": "meta.lgnd.f",
@@ -68,7 +64,7 @@
     }
   ],
 
-  "_comment": "a = align, c = color, fs = font size, i = image, j = justify, k = key, l = legend (Dye Sub, Double Shot), m = material (ABS, PBT), p = profiile (DSA, Cherry, G20), r = row, s = switch/stem, t = text"
+  "_comment": "a = align, c = color, fs = font size, i = image, j = justify, k = key, l = legend (Dye Sub, Double Shot), m = material (ABS, PBT), p = profiile (DSA, Cherry, G20), r = row, s = switch/stem type, t = text"
 }
 
 "short":
@@ -142,7 +138,7 @@
 
     {"w":1.75},
     {"K":"CAPS","lgnds":{"t":"CAPS LOCK"}},
-    {"K":"CAPS","w":1.25,"w2":1.75,"sp":true,"lgnds":{"t":"CAPS LOCK"}},
+    {"K":"CAPS","w":1.25,"w2":1.75,"stp":true,"lgnds":{"t":"CAPS LOCK"}},
 
     {"w":2},
     {"K":"BSPC","lgnds":{"t":"BACKSPACE"}},
@@ -184,7 +180,7 @@
     "FN",
     {"K":"LSFT","lgnds":{"t":"SHIFT"}},
     {"K":"LCTL","lgnds":{"t":"CONTROL"}},
-    {"K":"LCTL","w":1.25,"w2":1.75,"sp":true,"lgnds":{"t":"CONTROL"}}
+    {"K":"LCTL","w":1.25,"w2":1.75,"stp":true,"lgnds":{"t":"CONTROL"}}
   ],
   [
     {"name":"Numpad","c":"GDE","fs":"24"},

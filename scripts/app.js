@@ -8,7 +8,8 @@
   app.addEventListener('dom-change', function() {
     console.log('Bindings have been resolved, content is loaded');
 
-    document.querySelector("paper-slider").addEventListener('immediate-value-change', function() {
+    document.querySelector('paper-slider').
+    addEventListener('immediate-value-change', function() {
       updateLayout();
     });
   });
@@ -21,79 +22,79 @@
   app.shiftKey = false;
   app.controlKey = false;
 
-  window.addEventListener("keydown", function(event) {
+  window.addEventListener('keydown', function(event) {
     if (event.defaultPrevented) {
       return; // Should do nothing if the key event was already consumed.
     }
 
     switch (event.key) {
-      case "Shift":
+      case 'Shift':
         app.shiftKey = true;
         break;
-      case "Control":
+      case 'Control':
         app.controlKey = true;
         break;
-      case "Alt":
+      case 'Alt':
         app.controlKey = true;
         break;
-      case "Meta":
+      case 'Meta':
         app.controlKey = true;
         break;
-      case "OS":
+      case 'OS':
         //app.osKey = true;
         break;
-      case "Escape":
+      case 'Escape':
         keyHTML.deselectAll();
         break;
-      case "Delete":
+      case 'Delete':
         app.deleteKey();
         break;
-      case "ArrowUp":
-        app.moveKey("up");
+      case 'ArrowUp':
+        app.moveKey('up');
         break;
-      case "ArrowDown":
-        app.moveKey("down");
+      case 'ArrowDown':
+        app.moveKey('down');
         break;
-      case "ArrowLeft":
-        app.moveKey("left");
+      case 'ArrowLeft':
+        app.moveKey('left');
         break;
-      case "ArrowRight":
-        app.moveKey("right");
+      case 'ArrowRight':
+        app.moveKey('right');
         break;
       default:
         return; // Quit when this doesn't handle the key event.
     }
 
-    // Consume the event for suppressing "double action".
+    // Consume the event for suppressing 'double action'.
     event.preventDefault();
   }, true);
 
-  window.addEventListener("keyup", function(event) {
+  window.addEventListener('keyup', function(event) {
     if (event.defaultPrevented) {
       return; // Should do nothing if the key event was already consumed.
     }
 
     switch (event.key) {
-      case "Shift":
+      case 'Shift':
         app.shiftKey = false;
         break;
-      case "Control":
+      case 'Control':
         app.controlKey = false;
         break;
-      case "Alt":
+      case 'Alt':
         app.controlKey = false;
         break;
-      case "Meta":
+      case 'Meta':
         app.controlKey = false;
         break;
-      case "OS":
+      case 'OS':
         //app.osKey = false;
         break;
       default:
         return; // Quit when this doesn't handle the key event.
     }
 
-    // Consume the event for suppressing "double action".
+    // Consume the event for suppressing 'double action'.
     event.preventDefault();
   }, true);
 

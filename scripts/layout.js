@@ -25,6 +25,7 @@ app.loadPreset = function() {
 
   document.querySelector('#saveLayout').removeAttribute('disabled');
   document.querySelector('#addKey').removeAttribute('disabled');
+  document.querySelector('#zoomSlider').removeAttribute('disabled');
 
   var zoomSlider = document.querySelector('#zoomSlider');
   zoomSlider.addEventListener('immediate-value-change', function() {

@@ -6,7 +6,7 @@
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page
   app.addEventListener('dom-change', function() {
-    console.log('Bindings have been resolved, content is loaded');
+    //console.log('Bindings have been resolved, content is loaded');
 
     document.querySelector('paper-slider').
     addEventListener('immediate-value-change', function() {

@@ -58,6 +58,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /* paper-tabs */
     --paper-tabs-selection-bar-color:  #FF4081;
     --paper-tab-ink:                   #FF4081;
+
+    /* paper-slider */
+    --paper-slider-active-color:  #FF4081;
+    /*--paper-slider-secondary-color*/
+    --paper-slider-knob-color:    #FF4081;
+    --paper-slider-pin-color:     #FF4081;
   }
 
   /* General styles */
@@ -142,68 +148,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     width: 100%;
     height: 100%;
     overflow: auto;
-  }
-
-  /* Keycap Profiles */
-  .key {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 0;
-
-    /* Disable highlighting/selecting text */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
-  }
-
-  .keyBG {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #888;
-    background-color: #DDD;
-  }
-
-  .keyMG {
-    border: 1px solid #BBB;
-    background-color: #FFF;
-  }
-
-  .keyFG {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-style: none;
-    background-color: rgba(0,0,0,0.04);
-    background-repeat: no-repeat;
-  }
-
-  .keyBG:hover {
-    border: 2px solid #888;
-  }
-  .keyBG:hover .keyMG {
-    border: 2px solid #BBB;
-  }
-
-  .selected {
-    z-index: 1;
-  }
-  .selected .keyBG{
-    border: 2px solid #666;
-  }
-  .selected .keyMG{
-    border: 2px solid #888;
-  }
-  .selected.last .keyBG{
-    border: 2px solid #000;
-  }
-  .selected.last .keyMG{
-    border: 2px solid #444;
   }
 
 

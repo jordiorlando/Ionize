@@ -59,9 +59,9 @@
             </a>
           </paper-item>
           <paper-item>
-            <a data-route="firmware" href="/firmware">
+            <a data-route="keymap" href="/keymap">
               <iron-icon icon="hardware:memory"></iron-icon>
-              <span>Firmware</span>
+              <span>Keymap</span>
             </a>
           </paper-item>
         </paper-menu>
@@ -125,7 +125,7 @@
                 <div class="paper-font-button">Delete Key</div>
               </paper-button>
 
-              <paper-slider min="10" max="250" value="100" immediate-value="{{unitSize}}" pin></paper-slider>
+              <paper-slider min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
             </div>
 
             <div class="layout horizontal" data-route="keyset">
@@ -140,13 +140,13 @@
               </paper-button>
             </div>
 
-            <div class="layout horizontal" data-route="firmware">
-              <paper-button on-tap="saveFirmware">
+            <div class="layout horizontal" data-route="keymap">
+              <paper-button on-tap="saveKeymap">
                 <iron-icon icon="file-download"></iron-icon>
                 <div class="paper-font-button">Download Code</div>
               </paper-button>
 
-              <paper-button on-tap="loadFirmware">
+              <paper-button on-tap="loadKeymap">
                 <iron-icon icon="device:usb"></iron-icon>
                 <div class="paper-font-button">Upload to KB</div>
               </paper-button>
@@ -169,7 +169,7 @@
 
             </div>
 
-            <div class="layout horizontal" data-route="firmware">
+            <div class="layout horizontal" data-route="keymap">
 
             </div>
           </iron-pages>

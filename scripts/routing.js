@@ -11,8 +11,8 @@ window.addEventListener('WebComponentsReady', function() {
     app.route = 'keyset';
   });
 
-  page('/firmware', function () {
-    app.route = 'firmware';
+  page('/keymap', function () {
+    app.route = 'keymap';
   });
 
   // Do add #! before urls

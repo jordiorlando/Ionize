@@ -290,11 +290,12 @@ var resizeLayout = function() {
   container.style.padding = (app.unitSize / 4) + 'px';
   container.style.width = (layoutWidth() * app.unitSize) + 'px';
   container.style.height = (layoutHeight() * app.unitSize) + 'px';
+
+  modified = false;
 };
 
 var layoutWidth = function() {
   if (modified) {
-    modified = false;
     layoutWidthCurr = Math.max.apply(Math, layout.keys.map(function(key) {
       return key.x + key.w;
     }));
@@ -305,7 +306,6 @@ var layoutWidth = function() {
 
 var layoutHeight = function() {
   if (modified) {
-    modified = false;
     layoutHeightCurr = Math.max.apply(Math, layout.keys.map(function(key) {
       return key.y + key.h;
     }));

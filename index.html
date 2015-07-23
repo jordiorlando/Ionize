@@ -59,9 +59,9 @@
             </a>
           </paper-item>
           <paper-item>
-            <a data-route="firmware" href="/firmware">
+            <a data-route="keymap" href="/keymap">
               <iron-icon icon="hardware:memory"></iron-icon>
-              <span>Firmware</span>
+              <span>Keymap</span>
             </a>
           </paper-item>
         </paper-menu>
@@ -140,13 +140,13 @@
               </paper-button>
             </div>
 
-            <div class="layout horizontal" data-route="firmware">
-              <paper-button on-tap="saveFirmware">
+            <div class="layout horizontal" data-route="keymap">
+              <paper-button on-tap="saveKeymap">
                 <iron-icon icon="file-download"></iron-icon>
                 <div class="paper-font-button">Download Code</div>
               </paper-button>
 
-              <paper-button on-tap="loadFirmware">
+              <paper-button on-tap="loadKeymap">
                 <iron-icon icon="device:usb"></iron-icon>
                 <div class="paper-font-button">Upload to KB</div>
               </paper-button>
@@ -169,7 +169,7 @@
 
             </div>
 
-            <div class="layout horizontal" data-route="firmware">
+            <div class="layout horizontal" data-route="keymap">
 
             </div>
           </iron-pages>

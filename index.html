@@ -67,7 +67,7 @@
         </paper-menu>
       </paper-header-panel>
 
-      <paper-scroll-header-panel main class="flex" condenses keep-condensed-header scroll-away-topbar>
+      <paper-header-panel main mode="waterfall" class="flex">
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
@@ -150,24 +150,16 @@
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
-            <div class="layout horizontal" data-route="project">
+            <div data-route="project"></div>
 
-            </div>
+            <div data-route="layout" id="layout"></div>
 
-            <div class="layout horizontal" data-route="layout" id="layout">
+            <div data-route="keyset"></div>
 
-            </div>
-
-            <div class="layout horizontal" data-route="keyset">
-
-            </div>
-
-            <div class="layout horizontal" data-route="keymap">
-
-            </div>
+            <div data-route="keymap"></div>
           </iron-pages>
         </div>
-      </paper-scroll-header-panel>
+      </paper-header-panel>
 
     </paper-drawer-panel>
   </template>

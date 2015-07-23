@@ -243,9 +243,15 @@ var deserialize = function(serialized) {
 };
 
 var renderLayout = function() {
-  document.querySelector('#layout').innerHTML = '<paper-material elevation="1" style="position: absolute; margin: 16px; padding: 25px;" id="layoutContainer"></paper-material>';
-  var container = document.querySelector('#layoutContainer');
-  container.innerHTML = null;
+  var container = document.createElement('paper-material');
+  container.id = 'layoutContainer';
+  container.style.position = 'absolute';
+  container.style.margin = '16px';
+  container.style.padding = (app.unitSize / 4) + 'px';
+  container.setAttribute('elevation', 1);
+
+  document.querySelector('#layout').innerHTML = null;
+  document.querySelector('#layout').appendChild(container);
 
   for (var k in layout.keys) {
     container.appendChild(keyHTML.create(k));

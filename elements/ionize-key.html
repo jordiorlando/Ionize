@@ -1,0 +1,177 @@
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="ionize-key">
+  <style>
+    :host {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+
+      /* Disable highlighting/selecting text */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: default;
+    }
+
+    .keyBG {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #888;
+      background-color: #DDD;
+    }
+
+    .keyMG {
+      border: 1px solid #BBB;
+      background-color: #FFF;
+    }
+
+    .keyFG {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-style: none;
+      background-color: rgba(0,0,0,0.04);
+      background-repeat: no-repeat;
+    }
+
+    .keyName {
+      text-align: center;
+    }
+
+    .keyBG:hover {
+      border: 2px solid #888;
+    }
+    .keyBG:hover .keyMG {
+      border: 2px solid #BBB;
+    }
+
+    :host.selected {
+      z-index: 1;
+    }
+    :host.selected .keyBG{
+      border: 2px solid #666;
+    }
+    :host.selected .keyMG{
+      border: 2px solid #888;
+    }
+    :host.selected.last .keyBG{
+      border: 2px solid #000;
+    }
+    :host.selected.last .keyMG{
+      border: 2px solid #444 !important;
+    }
+  </style>
+
+  <template>
+    <div class="keyBG">
+      <div class="keyMG">
+        <div class="keyFG">
+          <div class="keyName">{{k}}</div>
+        </div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+<script>
+  // element registration
+  Polymer({
+    is: "ionize-key",
+
+    properties: {
+      /*selected: {
+        observer: '_selectedChanged',
+        type: Boolean,
+        value: null
+      },*/
+      unitSize: {
+        observer: '_unitSizeChanged',
+        type: Number,
+        value: null
+      },
+      k: {
+        type: String,
+        value: null
+      },
+      x: {
+        observer: '_xChanged',
+        type: Number,
+        value: null
+      },
+      y: {
+        observer: '_yChanged',
+        type: Number,
+        value: null
+      },
+      w: {
+        observer: '_wChanged',
+        type: Number,
+        value: null
+      },
+      h: {
+        observer: '_hChanged',
+        type: Number,
+        value: null
+      }
+    },
+
+    /*_selectedChanged: function() {
+      if (this.selected) {
+        this.classList.add('selected');
+      } else {
+        this.classList.remove('selected');
+      }
+    },*/
+
+    _unitSizeChanged: function() {
+      this.querySelector('.keyBG').style.borderRadius =
+        (app.unitSize / 10) + 'px';
+      this.querySelector('.keyMG').style.borderRadius =
+        (app.unitSize / 10) + 'px';
+      this.querySelector('.keyFG').style.borderRadius =
+        (app.unitSize / 10) + 'px';
+      this.querySelector('.keyName').style.fontSize =
+        (app.unitSize / 5) + 'px';
+
+      this._xChanged();
+      this._yChanged();
+      this._wChanged();
+      this._hChanged();
+    },
+
+    _xChanged: function() {
+      // TODO: remove the +0.25 offset and figure out a better way
+      this.style.left = ((this.x + 0.25) * this.unitSize) + 'px';
+    },
+
+    _yChanged: function() {
+      // TODO: remove the +0.25 offset and figure out a better way
+      this.style.top = ((this.y + 0.25) * this.unitSize) + 'px';
+    },
+
+    _wChanged: function() {
+      this.style.width = (this.w * this.unitSize) + 'px';
+      this.querySelector('.keyBG').style.width =
+        (this.w * this.unitSize - this.unitSize * 2.5 / 75) + 'px';
+      this.querySelector('.keyMG').style.width =
+        (this.w * this.unitSize - this.unitSize * 20 / 75) + 'px';
+      this.querySelector('.keyFG').style.width =
+        (this.w * this.unitSize - this.unitSize * 20 / 75) + 'px';
+    },
+
+    _hChanged: function() {
+      this.style.height = (this.h * this.unitSize) + 'px';
+      this.querySelector('.keyBG').style.height =
+        (this.h * this.unitSize - this.unitSize * 2.5 / 75) + 'px';
+      this.querySelector('.keyMG').style.height =
+        (this.h * this.unitSize - this.unitSize * 20 / 75) + 'px';
+      this.querySelector('.keyFG').style.height =
+        (this.h * this.unitSize - this.unitSize * 20 / 75) + 'px';
+    }
+  });
+</script>

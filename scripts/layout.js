@@ -1,7 +1,10 @@
 var app = document.querySelector('#app');
 
-app.unitSize = 90; // Size in px of 1U
+app.unitSize = 100; // Size in px of 1U
 app.stepSize = 0.25;
+var modified = true;
+var layoutWidthCurr = 15;
+var layoutHeightCurr = 5;
 var layout = {};
 
 app.saveLayout = function() {
@@ -17,13 +20,23 @@ app.loadPreset = function() {
   $.getJSON('../presets/layouts/60.json', function( data ) {
     layout = data;
     renderLayout();
+    resizeLayout();
   });
 
   document.querySelector('#saveLayout').removeAttribute('disabled');
   document.querySelector('#addKey').removeAttribute('disabled');
+
+  var zoomSlider = document.querySelector('#zoomSlider');
+  zoomSlider.addEventListener('immediate-value-change', function() {
+    app.unitSize = zoomSlider.immediateValue;
+    updateLayout();
+    resizeLayout();
+  });
 };
 
 app.addKey = function() {
+  modified = true;
+
   var key = {
     'k': null,
     'x': 0,
@@ -54,6 +67,8 @@ app.addKey = function() {
 };
 
 app.deleteKey = function() {
+  modified = true;
+
   var keys = document.querySelectorAll('.selected');
 
   for (var i = 0; i < keys.length; i++) {
@@ -79,6 +94,8 @@ app.deleteKey = function() {
 };
 
 app.moveKey = function(dir) {
+  modified = true;
+
   var container = document.querySelector('#layoutContainer');
   var keys = document.querySelectorAll('.selected');
   var canMove = true;
@@ -233,8 +250,6 @@ var renderLayout = function() {
     container.appendChild(keyHTML.create(k));
     keyHTML.update(k);
   }
-  container.style.width = (15 * app.unitSize) + 'px';
-  container.style.height = (5 * app.unitSize) + 'px';
   container.addEventListener('click', keyHTML.onClick, false);
 };
 
@@ -271,86 +286,57 @@ var sortLayout = function() {
 var resizeLayout = function() {
   var container = document.querySelector('#layoutContainer');
 
+  container.style.padding = (app.unitSize / 4) + 'px';
   container.style.width = (layoutWidth() * app.unitSize) + 'px';
   container.style.height = (layoutHeight() * app.unitSize) + 'px';
 };
 
 var layoutWidth = function() {
-  return Math.max.apply(Math, layout.keys.map(function(key) {
-    return key.x + key.w;
-  }));
+  if (modified) {
+    modified = false;
+    layoutWidthCurr = Math.max.apply(Math, layout.keys.map(function(key) {
+      return key.x + key.w;
+    }));
+  }
+
+  return layoutWidthCurr;
 };
 
 var layoutHeight = function() {
-  return Math.max.apply(Math, layout.keys.map(function(key) {
-    return key.y + key.h;
-  }));
+  if (modified) {
+    modified = false;
+    layoutHeightCurr = Math.max.apply(Math, layout.keys.map(function(key) {
+      return key.y + key.h;
+    }));
+  }
+
+  return layoutHeightCurr;
 };
 
 var keyHTML = {};
 
 keyHTML.create = function(k) {
-  var html = document.createElement('div');
-  html.id = 'key_' + k;
-  html.className = 'key';
-  html.style.width = app.unitSize + 'px';
-  html.style.height = app.unitSize + 'px';
+  var key = document.createElement('ionize-key');
+  key.id = 'key_' + k;
+  key.setAttribute('unit-size', app.unitSize);
+  key.setAttribute('k', 'NEW<br>' + k);
+  key.setAttribute('x', 0);
+  key.setAttribute('y', 0);
+  key.setAttribute('w', 1);
+  key.setAttribute('h', 1);
 
-  var keyBG = document.createElement('div');
-  keyBG.className = 'keyBG';
-  keyBG.style.width = (app.unitSize * 72.5 / 75) + 'px';
-  keyBG.style.height = (app.unitSize * 72.5 / 75) + 'px';
-  keyBG.style.borderRadius = (app.unitSize / 10) + 'px';
-
-  var keyMG = document.createElement('div');
-  keyMG.className = 'keyMG';
-  keyMG.style.width = (app.unitSize * 55 / 75) + 'px';
-  keyMG.style.height = (app.unitSize * 55 / 75) + 'px';
-  keyMG.style.borderRadius = (app.unitSize / 10) + 'px';
-
-  var keyFG = document.createElement('div');
-  keyFG.className = 'keyFG';
-  keyFG.style.width = (app.unitSize * 55 / 75) + 'px';
-  keyFG.style.height = (app.unitSize * 55 / 75) + 'px';
-  keyFG.style.borderRadius = (app.unitSize / 10) + 'px';
-
-  var keyName = document.createElement('div');
-  //keyName.className = 'keyName';
-  keyName.style.textAlign = 'center';
-  keyName.innerHTML = 'NEW<br>' + k;
-
-  keyFG.appendChild(keyName);
-  keyMG.appendChild(keyFG);
-  keyBG.appendChild(keyMG);
-  html.appendChild(keyBG);
-
-  return html;
+  return key;
 };
 
 keyHTML.update = function(k) {
-  var key = layout.keys[k];
-  var html = document.querySelector('#key_' + k);
-  html.style.left = ((key.x + 0.25) * app.unitSize) + 'px';
-  //html.setAttribute('x', key.x);
-  html.style.top = ((key.y + 0.25) * app.unitSize) + 'px';
-  //html.setAttribute('y', key.y);
-  html.style.width = (key.w * app.unitSize) + 'px';
-  html.style.height = (key.h * app.unitSize) + 'px';
-
-  var keyBG = html.firstElementChild;
-  keyBG.style.width = (key.w * app.unitSize - app.unitSize * 2.5 / 75) + 'px';
-  keyBG.style.height = (key.h * app.unitSize - app.unitSize * 2.5 / 75) + 'px';
-
-  var keyMG = keyBG.firstElementChild;
-  keyMG.style.width = (key.w * app.unitSize - app.unitSize * 20 / 75) + 'px';
-  keyMG.style.height = (key.h * app.unitSize - app.unitSize * 20 / 75) + 'px';
-
-  var keyFG = keyMG.firstElementChild;
-  keyFG.style.width = (key.w * app.unitSize - app.unitSize * 20 / 75) + 'px';
-  keyFG.style.height = (key.h * app.unitSize - app.unitSize * 20 / 75) + 'px';
-
-  var keyName = keyFG.firstElementChild;
-  keyName.innerHTML = key.k;
+  var keyData = layout.keys[k];
+  var key = document.querySelector('#key_' + k);
+  key.setAttribute('unit-size', app.unitSize);
+  key.setAttribute('k', keyData.k);
+  key.setAttribute('x', keyData.x);
+  key.setAttribute('y', keyData.y);
+  key.setAttribute('w', keyData.w);
+  key.setAttribute('h', keyData.h);
 };
 
 keyHTML.onClick = function(event) {

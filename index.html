@@ -103,19 +103,8 @@
                 </div>
               </paper-button>
 
-              <paper-button on-tap="addKey" disabled id="addKey">
-                <div class="paper-font-button">
-                  <iron-icon icon="add"></iron-icon>
-                  Add Key
-                </div>
-              </paper-button>
-
-              <paper-button on-tap="deleteKey" disabled id="deleteKey">
-                <div class="paper-font-button">
-                  <iron-icon icon="delete"></iron-icon>
-                  Delete Key
-                </div>
-              </paper-button>
+              <paper-icon-button icon="delete" on-tap="deleteKey" disabled id="deleteKey">
+              </paper-icon-button>
 
               <!--<iron-icon icon="zoom-out"></iron-icon>-->
               <paper-slider class="bottom" min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
@@ -153,7 +142,9 @@
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
             <div data-route="project"></div>
 
-            <div data-route="layout" id="layout"></div>
+            <div data-route="layout" id="layout">
+              <paper-fab icon="add" on-tap="addKey" id="addKey"></paper-fab>
+            </div>
 
             <div data-route="keyset"></div>
 

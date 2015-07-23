@@ -243,6 +243,10 @@ var deserialize = function(serialized) {
 };
 
 var renderLayout = function() {
+  if (document.querySelector('#layoutContainer') !== null) {
+    document.querySelector('#layoutContainer').remove();
+  }
+
   var container = document.createElement('paper-material');
   container.id = 'layoutContainer';
   container.style.position = 'absolute';
@@ -250,7 +254,6 @@ var renderLayout = function() {
   container.style.padding = (app.unitSize / 4) + 'px';
   container.setAttribute('elevation', 1);
 
-  document.querySelector('#layout').innerHTML = null;
   document.querySelector('#layout').appendChild(container);
 
   for (var k in layout.keys) {
@@ -258,6 +261,8 @@ var renderLayout = function() {
     keyHTML.update(k);
   }
   container.addEventListener('click', keyHTML.onClick, false);
+
+  resizeLayout();
 };
 
 var updateLayout = function() {

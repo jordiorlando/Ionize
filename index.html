@@ -69,63 +69,56 @@
 
       <paper-scroll-header-panel main class="flex" condenses keep-condensed-header scroll-away-topbar>
         <!-- Main Toolbar -->
-        <paper-toolbar class="tall" id="mainToolbar">
-          <paper-icon-button class="top" id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <div class="top paper-font-display2 app-name">D1SC0tech</div>
-          <span class="top flex"></span>
-          <paper-input label="search"></paper-input>
-          <paper-icon-button class="top" icon="search" on-tap="searchAction"></paper-icon-button>
-
-          <paper-tabs class="middle" selected="3">
-            <paper-tab link>
-    					<a href="http://d1sc0te.ch" class="horizontal center-center layout">home</a>
-    				</paper-tab>
-    				<paper-tab link>
-    					<a href="http://store.d1sc0te.ch" class="horizontal center-center layout">store</a>
-    				</paper-tab>
-    				<paper-tab link>
-    					<a href="http://blog.d1sc0te.ch" class="horizontal center-center layout">blog</a>
-    				</paper-tab>
-            <paper-tab link>
-    					<a href="http://ionize.d1sc0te.ch" class="horizontal center-center layout">ionize</a>
-    				</paper-tab>
-          </paper-tabs>
-
-          <iron-pages class="bottom" attr-for-selected="data-route" selected="{{route}}">
+        <paper-toolbar id="mainToolbar">
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
             <div class="layout horizontal" data-route="project">
               <paper-button>
-                <iron-icon icon="cloud-upload"></iron-icon>
-                <div class="paper-font-button">Save to Server</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="cloud-upload"></iron-icon>
+                  Save to Server
+                </div>
               </paper-button>
             </div>
 
             <div class="layout horizontal center" data-route="layout">
               <paper-button on-tap="saveLayout" disabled id="saveLayout">
-                <iron-icon icon="file-download"></iron-icon>
-                <div class="paper-font-button">Download JSON</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="file-download"></iron-icon>
+                  Download JSON
+                </div>
               </paper-button>
 
               <paper-button on-tap="loadLayout">
-                <iron-icon icon="file-upload"></iron-icon>
-                <div class="paper-font-button">Upload JSON</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="file-upload"></iron-icon>
+                  Upload JSON
+                </div>
               </paper-button>
 
               <paper-button on-tap="loadPreset">
-                <iron-icon icon="arrow-drop-down"></iron-icon>
-                <div class="paper-font-button">Load Preset</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="arrow-drop-down"></iron-icon>
+                  Load Preset
+                </div>
               </paper-button>
 
               <paper-button on-tap="addKey" disabled id="addKey">
-                <iron-icon icon="add"></iron-icon>
-                <div class="paper-font-button">Add Key</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="add"></iron-icon>
+                  Add Key
+                </div>
               </paper-button>
 
               <paper-button on-tap="deleteKey" disabled id="deleteKey">
-                <iron-icon icon="delete"></iron-icon>
-                <div class="paper-font-button">Delete Key</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="delete"></iron-icon>
+                  Delete Key
+                </div>
               </paper-button>
 
-              <paper-slider min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
+              <!--<iron-icon icon="zoom-out"></iron-icon>-->
+              <paper-slider class="bottom" min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
+              <!--<iron-icon icon="zoom-in"></iron-icon>-->
             </div>
 
             <div class="layout horizontal" data-route="keyset">

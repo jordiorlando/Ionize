@@ -31,7 +31,7 @@
 
       <paper-header-panel drawer mode="seamed">
         <!-- Drawer Toolbar -->
-        <paper-toolbar id="drawerToolbar">
+        <paper-toolbar class="medium-tall" id="drawerToolbar">
           <div class="title">
             <iron-icon icon="hardware:keyboard"></iron-icon>
             <span class="paper-font-title">Ionize</span>
@@ -53,15 +53,16 @@
             </a>
           </paper-item>
           <paper-item>
-            <a data-route="keyset" href="/keyset">
-              <iron-icon icon="image:brush"></iron-icon>
-              <span>Keyset</span>
-            </a>
-          </paper-item>
-          <paper-item>
             <a data-route="keymap" href="/keymap">
               <iron-icon icon="hardware:memory"></iron-icon>
               <span>Keymap</span>
+            </a>
+          </paper-item>
+          <!--TODO: make keyset editor-->
+          <paper-item>
+            <a data-route="keyset" href="/keyset">
+              <iron-icon icon="image:brush"></iron-icon>
+              <span>Keyset</span>
             </a>
           </paper-item>
         </paper-menu>
@@ -69,62 +70,75 @@
 
       <paper-header-panel main mode="waterfall" class="flex">
         <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar">
-          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <iron-pages attr-for-selected="data-route" selected="{{route}}">
-            <div class="layout horizontal" data-route="project">
-              <paper-button>
-                <div class="paper-font-button">
-                  <iron-icon icon="cloud-upload"></iron-icon>
-                  Save to Server
-                </div>
-              </paper-button>
-            </div>
+        <paper-toolbar class="medium-tall" id="mainToolbar">
+          <paper-icon-button class="top" id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
 
-            <div class="layout horizontal center" data-route="layout">
-              <paper-button on-tap="saveLayout" disabled id="saveLayout">
+          <!--TODO: remove no-animation-->
+          <paper-menu-button class="top" no-animations>
+            <paper-button class="dropdown-trigger">File</paper-button>
+            <paper-menu class="dropdown-content" id="fileMenu">
+              <paper-item>New</paper-item>
+              <paper-item>Open</paper-item>
+              <paper-item>
+                <iron-icon icon="file-upload"></iron-icon>
+                Open JSON
+              </paper-item>
+              <paper-item>DIVIDER</paper-item>
+              <paper-item>
+                <iron-icon icon="save"></iron-icon>
+                Save
+              </paper-item>
+              <paper-item on-tap="saveLayout" disabled id="saveLayout">
                 <div class="paper-font-button">
                   <iron-icon icon="file-download"></iron-icon>
-                  Download JSON
+                  Save JSON
                 </div>
-              </paper-button>
-              <paper-button on-tap="loadLayout">
-                <div class="paper-font-button">
-                  <iron-icon icon="file-upload"></iron-icon>
-                  Upload JSON
-                </div>
-              </paper-button>
+              </paper-item>
+            </paper-menu>
+          </paper-menu-button>
+
+          <!--TODO: remove no-animation-->
+          <paper-menu-button class="top" no-animations>
+            <paper-button class="dropdown-trigger">Edit</paper-button>
+            <paper-menu class="dropdown-content" id="editMenu">
+              <paper-item>
+                <iron-icon icon="undo"></iron-icon>
+                Undo
+              </paper-item>
+              <paper-item>
+                <iron-icon icon="redo"></iron-icon>
+                Redo
+              </paper-item>
+              <paper-item>DIVIDER</paper-item>
+            </paper-menu>
+          </paper-menu-button>
+
+          <!--TODO: remove no-animation-->
+          <paper-menu-button class="top" no-animations>
+            <paper-button class="dropdown-trigger">View</paper-button>
+            <paper-menu class="dropdown-content" id="viewMenu">
+              <paper-item>
+                Zoom
+                <!--<iron-icon icon="zoom-out"></iron-icon>-->
+                <paper-slider class="bottom" min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
+                <!--<iron-icon icon="zoom-in"></iron-icon>-->
+              </paper-item>
+            </paper-menu>
+          </paper-menu-button>
+
+          <iron-pages class="bottom" attr-for-selected="data-route" selected="{{route}}">
+            <div class="layout horizontal" data-route="project"></div>
+
+            <div class="layout horizontal center" data-route="layout">
               <paper-button on-tap="loadPreset">
                 <div class="paper-font-button">
                   <iron-icon icon="arrow-drop-down"></iron-icon>
                   Load Preset
                 </div>
               </paper-button>
-
-              <div class="divider-vert"></div>
-
-              <!--<iron-icon icon="zoom-out"></iron-icon>-->
-              <paper-slider class="bottom" min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
-              <!--<iron-icon icon="zoom-in"></iron-icon>-->
             </div>
 
             <div class="layout horizontal center" data-route="keyset">
-              <paper-button on-tap="saveKeyset">
-                <div class="paper-font-button">
-                  <iron-icon icon="file-download"></iron-icon>
-                  Download JSON
-                </div>
-              </paper-button>
-
-              <paper-button on-tap="loadKeyset">
-                <div class="paper-font-button">
-                  <iron-icon icon="file-upload"></iron-icon>
-                  Upload JSON
-                </div>
-              </paper-button>
-
-              <div class="divider-vert"></div>
-
               <paper-button toggles>
                 <iron-icon icon="image:color-lens"></iron-icon>
               </paper-button>

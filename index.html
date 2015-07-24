@@ -88,14 +88,12 @@
                   Download JSON
                 </div>
               </paper-button>
-
               <paper-button on-tap="loadLayout">
                 <div class="paper-font-button">
                   <iron-icon icon="file-upload"></iron-icon>
                   Upload JSON
                 </div>
               </paper-button>
-
               <paper-button on-tap="loadPreset">
                 <div class="paper-font-button">
                   <iron-icon icon="arrow-drop-down"></iron-icon>
@@ -103,7 +101,7 @@
                 </div>
               </paper-button>
 
-              <paper-icon-button icon="delete" on-tap="deleteKey" disabled id="deleteKey"></paper-icon-button>
+              <div class="divider-vert"></div>
 
               <!--<iron-icon icon="zoom-out"></iron-icon>-->
               <paper-slider class="bottom" min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
@@ -135,6 +133,44 @@
               </paper-button>
 
               <div class="divider-vert"></div>
+
+              <!--TODO: remove no-animation-->
+              <!--<paper-menu-button no-animations id="fontDropdown">
+                <div class="dropdown-trigger layout horizontal center">
+                  <paper-input pattern="[a-z][A-Z]*" auto-validate label="Roboto" no-label-float></paper-input>
+                  <iron-icon icon="arrow-drop-down"></iron-icon>
+                </div>
+                <paper-menu class="dropdown-content">
+                  <paper-item>Arial</paper-item>
+                </paper-menu>
+              </paper-menu-button>
+
+              <div class="divider-vert"></div>
+
+              <paper-menu-button no-animations id="fontSizeDropdown">
+                <div class="dropdown-trigger layout horizontal center">
+                  <paper-input pattern="[0-9]*" auto-validate label="12" no-label-float id="fontSizeInput"></paper-input>
+                  <iron-icon icon="arrow-drop-down"></iron-icon>
+                </div>
+                <paper-menu class="dropdown-content">
+                  <paper-item>8</paper-item>
+                  <paper-item>9</paper-item>
+                  <paper-item>10</paper-item>
+                  <paper-item>11</paper-item>
+                  <paper-item>12</paper-item>
+                  <paper-item>14</paper-item>
+                  <paper-item>18</paper-item>
+                  <paper-item>24</paper-item>
+                  <paper-item>30</paper-item>
+                  <paper-item>36</paper-item>
+                  <paper-item>48</paper-item>
+                  <paper-item>60</paper-item>
+                  <paper-item>72</paper-item>
+                  <paper-item>96</paper-item>
+                </paper-menu>
+              </paper-menu-button>
+
+              <div class="divider-vert"></div>-->
 
               <paper-button toggles>
                 <iron-icon icon="editor:format-bold"></iron-icon>
@@ -206,7 +242,8 @@
             <div data-route="project"></div>
 
             <div data-route="layout" id="layout">
-              <paper-fab icon="add" on-tap="addKey" id="addKey"></paper-fab>
+              <paper-fab mini icon="delete" on-tap="deleteKey" disabled id="deleteKey"></paper-fab>
+              <paper-fab icon="add" on-tap="addKey" disabled id="addKey"></paper-fab>
             </div>
 
             <div data-route="keyset"></div>

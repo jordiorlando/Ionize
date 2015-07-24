@@ -242,11 +242,14 @@
             <div data-route="project"></div>
 
             <div data-route="layout" id="layout">
-              <paper-fab mini icon="delete" on-tap="deleteKey" disabled id="deleteKey"></paper-fab>
-              <paper-fab icon="add" on-tap="addKey" disabled id="addKey"></paper-fab>
+              <paper-fab mini icon="delete" on-tap="layoutDeleteKey" disabled id="layoutDeleteKey"></paper-fab>
+              <paper-fab icon="add" on-tap="layoutAddKey" disabled id="layoutAddKey"></paper-fab>
             </div>
 
-            <div data-route="keyset"></div>
+            <div data-route="keyset">
+              <paper-fab mini icon="delete" on-tap="keysetDeleteKey" disabled id="keysetDeleteKey"></paper-fab>
+              <paper-fab icon="add" on-tap="keysetAddKey" id="keysetAddKey"></paper-fab>
+            </div>
 
             <div data-route="keymap"></div>
           </iron-pages>

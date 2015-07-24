@@ -24,7 +24,7 @@ app.loadPreset = function() {
   });
 
   document.querySelector('#saveLayout').removeAttribute('disabled');
-  document.querySelector('#addKey').removeAttribute('disabled');
+  document.querySelector('#layoutAddKey').removeAttribute('disabled');
   document.querySelector('#zoomSlider').removeAttribute('disabled');
 
   var zoomSlider = document.querySelector('#zoomSlider');
@@ -35,7 +35,7 @@ app.loadPreset = function() {
   });
 };
 
-app.addKey = function() {
+app.layoutAddKey = function() {
   modified = true;
 
   var key = {
@@ -67,7 +67,7 @@ app.addKey = function() {
   keyHTML.update(numKeys);
 };
 
-app.deleteKey = function() {
+app.layoutDeleteKey = function() {
   modified = true;
 
   var keys = document.querySelectorAll('.selected');
@@ -88,7 +88,7 @@ app.deleteKey = function() {
     //delete layout.keys[k];
   }
 
-  document.querySelector('#deleteKey').setAttribute('disabled');
+  document.querySelector('#layoutDeleteKey').setAttribute('disabled');
 
   //sortLayout();
   resizeLayout();
@@ -399,9 +399,9 @@ keyHTML.onClick = function(event) {
     }
 
     if (document.querySelector('.selected') !== null) {
-      document.querySelector('#deleteKey').removeAttribute('disabled');
+      document.querySelector('#layoutDeleteKey').removeAttribute('disabled');
     } else {
-      document.querySelector('#deleteKey').setAttribute('disabled');
+      document.querySelector('#layoutDeleteKey').setAttribute('disabled');
     }
   } else {
     keyHTML.deselectAll();
@@ -414,5 +414,5 @@ keyHTML.deselectAll = function() {
     keys.item(i).classList.remove('selected', 'last');
   }
 
-  document.querySelector('#deleteKey').setAttribute('disabled');
+  document.querySelector('#layoutDeleteKey').setAttribute('disabled');
 };

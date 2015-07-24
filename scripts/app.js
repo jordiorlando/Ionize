@@ -47,7 +47,7 @@
         keyHTML.deselectAll();
         break;
       case 'Delete':
-        app.deleteKey();
+        app.layoutDeleteKey();
         break;
       case 'ArrowUp':
         app.moveKey('up');

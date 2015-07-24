@@ -114,32 +114,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     padding: 0 16px;
   }
 
-  paper-tab a {
-    text-decoration: none;
-    color: var(--text-primary-color);
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-direction: row;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    font-family: 'Roboto', 'Noto', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 24px;
-    min-height: 48px;
-    padding: 0 16px;
+  paper-button[toggles][active] {
+    background-color: rgba(255,255,255,0.25);
   }
 
-  .app-name {
-    font-family: Comfortaa-Regular;
-    padding-top: 12px;
-    padding-left: 12px;
+  .divider-vert {
+    display: block;
+    width: 1px;
+    height: 40px;
+    margin: 8px;
+    background-color: rgba(0,0,0,0.12);
   }
 
   /* Height of the scroll area */

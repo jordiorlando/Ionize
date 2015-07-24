@@ -103,35 +103,98 @@
                 </div>
               </paper-button>
 
-              <paper-icon-button icon="delete" on-tap="deleteKey" disabled id="deleteKey">
-              </paper-icon-button>
+              <paper-icon-button icon="delete" on-tap="deleteKey" disabled id="deleteKey"></paper-icon-button>
 
               <!--<iron-icon icon="zoom-out"></iron-icon>-->
               <paper-slider class="bottom" min="10" max="250" value="100" pin disabled id="zoomSlider"></paper-slider>
               <!--<iron-icon icon="zoom-in"></iron-icon>-->
             </div>
 
-            <div class="layout horizontal" data-route="keyset">
+            <div class="layout horizontal center" data-route="keyset">
               <paper-button on-tap="saveKeyset">
-                <iron-icon icon="file-download"></iron-icon>
-                <div class="paper-font-button">Download JSON</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="file-download"></iron-icon>
+                  Download JSON
+                </div>
               </paper-button>
 
               <paper-button on-tap="loadKeyset">
-                <iron-icon icon="file-upload"></iron-icon>
-                <div class="paper-font-button">Upload JSON</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="file-upload"></iron-icon>
+                  Upload JSON
+                </div>
+              </paper-button>
+
+              <div class="divider-vert"></div>
+
+              <paper-button toggles>
+                <iron-icon icon="image:color-lens"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:format-color-fill"></iron-icon>
+              </paper-button>
+
+              <div class="divider-vert"></div>
+
+              <paper-button toggles>
+                <iron-icon icon="editor:format-bold"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:format-italic"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:format-underlined"></iron-icon>
+              </paper-button>
+              <paper-menu-button no-animations> <!--TODO: remove no-animation-->
+                <paper-button class="dropdown-trigger">
+                  <iron-icon icon="editor:format-color-text"></iron-icon>
+                  <iron-icon icon="arrow-drop-down"></iron-icon>
+                </paper-button>
+                <paper-menu class="dropdown-content">
+                  <paper-item>Share</paper-item>
+                  <paper-item>Settings</paper-item>
+                  <paper-item>Help</paper-item>
+                </paper-menu>
+              </paper-menu-button>
+
+              <div class="divider-vert"></div>
+
+              <paper-button toggles>
+                <iron-icon icon="editor:format-align-left"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:format-align-center"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:format-align-right"></iron-icon>
+              </paper-button>
+
+              <div class="divider-vert"></div>
+
+              <paper-button toggles>
+                <iron-icon icon="editor:vertical-align-top"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:vertical-align-center"></iron-icon>
+              </paper-button>
+              <paper-button toggles>
+                <iron-icon icon="editor:vertical-align-bottom"></iron-icon>
               </paper-button>
             </div>
 
-            <div class="layout horizontal" data-route="keymap">
+            <div class="layout horizontal center" data-route="keymap">
               <paper-button on-tap="saveKeymap">
-                <iron-icon icon="file-download"></iron-icon>
-                <div class="paper-font-button">Download Code</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="file-download"></iron-icon>
+                  Download Code
+                </div>
               </paper-button>
 
               <paper-button on-tap="loadKeymap">
-                <iron-icon icon="device:usb"></iron-icon>
-                <div class="paper-font-button">Upload to KB</div>
+                <div class="paper-font-button">
+                  <iron-icon icon="device:usb"></iron-icon>
+                  Upload to KB
+                </div>
               </paper-button>
             </div>
           </iron-pages>

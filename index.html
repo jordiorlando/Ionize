@@ -24,22 +24,25 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="imports.html">
 </head>
-<body unresolved class="fullbleed layout vertical">
+<body unresolved class="fullbleed layout vertical theme-light">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
     <paper-drawer-panel id="paperDrawerPanel">
 
-      <paper-header-panel drawer mode="seamed">
+      <paper-header-panel drawer mode="seamed" class="theme-light">
         <!-- Drawer Toolbar -->
-        <paper-toolbar class="medium-tall" id="drawerToolbar">
+        <paper-toolbar class="medium-tall theme-light" id="drawerToolbar">
           <div class="title">
             <iron-icon icon="hardware:keyboard"></iron-icon>
             <span class="paper-font-title">Ionize</span>
           </div>
+          <!--<div class="bottom flex">
+            <span class="paper-font-caption">by D1SC0tech</span>
+          </div>-->
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+        <paper-menu class="list theme-light" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
           <paper-item>
             <a data-route="project" href="/">
               <iron-icon icon="folder-open"></iron-icon>
@@ -76,7 +79,7 @@
           <!--TODO: remove no-animation-->
           <paper-menu-button class="top" no-animations>
             <paper-button class="dropdown-trigger">File</paper-button>
-            <paper-menu class="dropdown-content" id="fileMenu">
+            <paper-menu class="dropdown-content theme-light" id="fileMenu">
               <paper-item disabled>New</paper-item>
               <paper-item disabled>Open</paper-item>
               <paper-item on-tap="loadPreset">
@@ -101,7 +104,7 @@
           <!--TODO: remove no-animation-->
           <paper-menu-button class="top" no-animations>
             <paper-button class="dropdown-trigger">Edit</paper-button>
-            <paper-menu class="dropdown-content" id="editMenu">
+            <paper-menu class="dropdown-content theme-light" id="editMenu">
               <paper-item disabled>
                 <iron-icon icon="undo"></iron-icon>
                 Undo
@@ -129,7 +132,7 @@
           <!--TODO: remove no-animation-->
           <paper-menu-button class="top" no-animations>
             <paper-button class="dropdown-trigger">View</paper-button>
-            <paper-menu class="dropdown-content" id="viewMenu">
+            <paper-menu class="dropdown-content theme-light" id="viewMenu">
               <paper-item>
                 <iron-icon icon="zoom-out"></iron-icon>
                 <paper-slider class="bottom" min="10" max="500" value="72" pin disabled id="zoomSlider"></paper-slider>
@@ -138,6 +141,10 @@
               <paper-item>
                 <paper-toggle-button checked disabled id="showCaps"></paper-toggle-button>
                 Show keycaps
+              </paper-item>
+              <paper-item>
+                <paper-toggle-button id="darkTheme"></paper-toggle-button>
+                Dark theme
               </paper-item>
             </paper-menu>
           </paper-menu-button>

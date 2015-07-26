@@ -265,6 +265,11 @@ var renderLayout = function() {
   }
 
   var keyboard = document.createElement('paper-material');
+  if (document.querySelector('#darkTheme').hasAttribute('checked')) {
+    keyboard.className = 'theme-dark';
+  } else {
+    keyboard.className = 'theme-light';
+  }
   keyboard.style.position = 'absolute';
   keyboard.style.margin = '16px';
   //keyboard.style.borderRadius = '8px';

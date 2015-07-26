@@ -8,7 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<style is="custom-style">
+<style is="custom-style" id="theme-style">
 
   /* Comfortaa fonts */
   @font-face {
@@ -27,55 +27,87 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* Application theme */
 
   :root {
-    --dark-primary-color:       #5D4037;
-    --default-primary-color:    #795548;
-    --light-primary-color:      #D7CCC8;
+    --dark-primary-color:       #0288D1; /* Light Blue 700 */
+    --default-primary-color:    #03A9F4; /* Light Blue 500 */
+    --light-primary-color:      #B3E5FC; /* Light Blue 100 */
     --text-primary-color:       #FFFFFF;
-    --accent-color:             #FF4081;
-    --primary-background-color: #D7CCC8;
+    --accent-color:             #FF4081; /* Pink A200 */
+    --primary-background-color: #B3E5FC; /* Light Blue 100 */
     --primary-text-color:       #212121;
     --secondary-text-color:     #727272;
     --disabled-text-color:      #BDBDBD;
     --divider-color:            #B6B6B6;
 
+    --theme-card-light:         #FFFFFF; /* White */
+    --theme-toolbar-light:      #F5F5F5; /* Grey 100 */
+    --theme-background-light:   #FAFAFA; /* Grey 50 */
+    --theme-card-dark:          #424242; /* Grey 800 */
+    --theme-toolbar-dark:       #212121; /* Grey 900 */
+    --theme-background-dark:    #303030;
+
 
     /* Components */
 
     /* paper-drawer-panel */
-    --drawer-menu-color:           #ffffff;
+    --drawer-menu-color:           #FFFFFF;
     --drawer-border-color:         1px solid #ccc;
     --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
 
     /* paper-menu */
-    --paper-menu-background-color: #fff;
+    --paper-menu-background-color: #FFFFFF;
     --menu-link-color:             #111111;
 
     /* paper-input */
     --paper-input-container-color:       rgba(255, 255, 255, 0.64);
     --paper-input-container-focus-color: rgba(255, 255, 255, 1);
-    --paper-input-container-input-color: #fff;
+    --paper-input-container-input-color: #FFFFFF;
 
     /* paper-tabs */
-    --paper-tabs-selection-bar-color:  #FF4081;
-    --paper-tab-ink:                   #FF4081;
+    --paper-tabs-selection-bar-color:  #FF4081; /* Pink A200 */
+    --paper-tab-ink:                   #FF4081; /* Pink A200 */
 
     /* paper-slider */
-    --paper-slider-active-color:  #FF4081;
+    --paper-slider-active-color:  #FF4081; /* Pink A200 */
     /*--paper-slider-secondary-color*/
-    --paper-slider-knob-color:    #FF4081;
-    --paper-slider-pin-color:     #FF4081;
+    --paper-slider-knob-color:    #FF4081; /* Pink A200 */
+    --paper-slider-pin-color:     #FF4081; /* Pink A200 */
 
     /* paper-toggle-button */
-    --paper-toggle-button-checked-bar-color:    #FF4081;
-    --paper-toggle-button-checked-button-color: #FF4081;
-    --paper-toggle-button-checked-ink-color:    #FF4081;
+    --paper-toggle-button-checked-bar-color:    #FF4081; /* Pink A200 */
+    --paper-toggle-button-checked-button-color: #FF4081; /* Pink A200 */
+    --paper-toggle-button-checked-ink-color:    #FF4081; /* Pink A200 */
   }
 
   /* General styles */
 
+  .theme-light {
+    background-color: var(--theme-toolbar-light);
+  }
+  .theme-light paper-item {
+    color: var(--primary-text-color);
+  }
+  .theme-dark {
+    background-color: var(--theme-toolbar-dark);
+  }
+  .theme-dark paper-item {
+    color: var(--text-primary-color);
+  }
+  body.theme-light {
+    background-color: var(--theme-background-light);
+  }
+  body.theme-dark, paper-toolbar.theme-dark {
+    background-color: var(--theme-background-dark);
+  }
+  paper-material.theme-light, paper-toolbar.theme-light {
+    background-color: var(--theme-card-light);
+  }
+  paper-material.theme-dark {
+    background-color: var(--theme-card-dark);
+  }
+
   #drawerToolbar {
     color: var(--secondary-text-color);
-    background-color: var(--drawer-menu-color);
+    /*background-color: var(--drawer-menu-color);*/
     border-bottom: var(--drawer-toolbar-border-color);
   }
 
@@ -104,7 +136,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   paper-item a {
     text-decoration: none;
-    color: var(--menu-link-color);
+    /*color: var(--menu-link-color);*/
+    color: inherit;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;

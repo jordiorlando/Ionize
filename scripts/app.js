@@ -8,10 +8,26 @@
   app.addEventListener('dom-change', function() {
     //console.log('Bindings have been resolved, content is loaded');
 
-    document.querySelector('paper-slider').
-    addEventListener('immediate-value-change', function() {
-      updateLayout();
-    });
+    document.querySelector('#zoomSlider').
+      addEventListener('immediate-value-change', function() {
+        updateLayout();
+      });
+    document.querySelector('#darkTheme').
+      addEventListener('change', function(event) {
+        if (event.target.hasAttribute('checked')) {
+          var elems = document.querySelectorAll('.theme-light');
+          for (var i = 0; i < elems.length; i++) {
+            elems.item(i).classList.remove('theme-light');
+            elems.item(i).classList.add('theme-dark');
+          }
+        } else {
+          var elems = document.querySelectorAll('.theme-dark');
+          for (var i = 0; i < elems.length; i++) {
+            elems.item(i).classList.remove('theme-dark');
+            elems.item(i).classList.add('theme-light');
+          }
+        }
+      });
   });
 
   // See https://github.com/Polymer/polymer/issues/1381

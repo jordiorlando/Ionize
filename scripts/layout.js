@@ -25,6 +25,9 @@ app.loadPreset = function() {
   document.querySelector('#saveLayout').removeAttribute('disabled');
   document.querySelector('#layoutAddKey').removeAttribute('disabled');
 
+  document.querySelector('#layout').addEventListener(
+    'tap', keyHTML.onTap, false);
+
   var zoomSlider = document.querySelector('#zoomSlider');
   zoomSlider.removeAttribute('disabled');
   zoomSlider.addEventListener('immediate-value-change', function() {
@@ -61,8 +64,6 @@ app.layoutAddKey = function() {
   if ((lastKey.x + lastKey.w) > (layoutWidth() - 1)) {
     key.x = 0;
     key.y = lastKey.y + 1;
-
-    container.style.height = ((key.y + key.h) * unitSize) + 'px';
   } else {
     key.x = lastKey.x + lastKey.w;
     key.y = lastKey.y;
@@ -80,6 +81,7 @@ app.layoutAddKey = function() {
 
   container.appendChild(keyHTML.create(numKeys));
   keyHTML.update(numKeys);
+  resizeLayout();
 };
 
 app.layoutDeleteKey = function() {
@@ -262,19 +264,24 @@ var renderLayout = function() {
     document.querySelector('#layoutContainer').remove();
   }
 
-  var container = document.createElement('paper-material');
+  var keyboard = document.createElement('paper-material');
+  keyboard.style.position = 'absolute';
+  keyboard.style.margin = '16px';
+  //keyboard.style.borderRadius = '8px';
+  keyboard.setAttribute('elevation', 1);
+
+  var container = document.createElement('div');
   container.id = 'layoutContainer';
   container.style.position = 'absolute';
-  container.style.margin = '16px';
-  container.setAttribute('elevation', 1);
 
-  document.querySelector('#layout').appendChild(container);
+  keyboard.appendChild(container);
+
+  document.querySelector('#layout').appendChild(keyboard);
 
   for (var k in layout.keys) {
     container.appendChild(keyHTML.create(k));
     keyHTML.update(k);
   }
-  container.addEventListener('tap', keyHTML.onTap, false);
 
   resizeLayout();
 };
@@ -311,9 +318,15 @@ var sortLayout = function() {
 
 var resizeLayout = function() {
   var container = document.querySelector('#layoutContainer');
+  var keyboard = container.parentNode;
   var unitSize = document.querySelector('#zoomSlider').immediateValue;
 
-  container.style.padding = (unitSize / 4) + 'px';
+  keyboard.style.padding = (unitSize / 4) + 'px';
+  keyboard.style.width = (layoutWidth() * unitSize) + 'px';
+  keyboard.style.height = (layoutHeight() * unitSize) + 'px';
+
+  container.style.left = (unitSize / 4) + 'px';
+  container.style.top = (unitSize / 4) + 'px';
   container.style.width = (layoutWidth() * unitSize) + 'px';
   container.style.height = (layoutHeight() * unitSize) + 'px';
 

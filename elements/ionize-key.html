@@ -188,13 +188,11 @@
     },
 
     _xChanged: function() {
-      // TODO: remove the +0.25 offset and figure out a better way
-      this.style.left = ((this.x + 0.25) * this.unitSize) + 'px';
+      this.style.left = (this.x * this.unitSize) + 'px';
     },
 
     _yChanged: function() {
-      // TODO: remove the +0.25 offset and figure out a better way
-      this.style.top = ((this.y + 0.25) * this.unitSize) + 'px';
+      this.style.top = (this.y * this.unitSize) + 'px';
     },
 
     _wChanged: function() {

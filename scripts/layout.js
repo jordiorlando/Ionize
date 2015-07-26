@@ -25,13 +25,22 @@ app.loadPreset = function() {
 
   document.querySelector('#saveLayout').removeAttribute('disabled');
   document.querySelector('#layoutAddKey').removeAttribute('disabled');
-  document.querySelector('#zoomSlider').removeAttribute('disabled');
 
   var zoomSlider = document.querySelector('#zoomSlider');
+  zoomSlider.removeAttribute('disabled');
   zoomSlider.addEventListener('immediate-value-change', function() {
     app.unitSize = zoomSlider.immediateValue;
     updateLayout();
     resizeLayout();
+  });
+
+  var showCaps = document.querySelector('#showCaps');
+  showCaps.removeAttribute('disabled');
+  showCaps.addEventListener('change', function(event) {
+    for (var k in layout.keys) {
+      document.querySelector('#key_' + k).showCap =
+        event.target.hasAttribute('checked');
+    }
   });
 };
 
@@ -359,7 +368,12 @@ keyHTML.update = function(k) {
 };
 
 keyHTML.onClick = function(event) {
-  var key = event.target.closest('.keyBG');
+  var key;
+  if (document.querySelector('#showCaps').hasAttribute('checked')) {
+    key = event.target.closest('.keyBG');
+  } else {
+    key = event.target.closest('.switch');
+  }
 
   if (key !== null) {
     key = key.parentNode;

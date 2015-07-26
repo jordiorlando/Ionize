@@ -64,6 +64,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /*--paper-slider-secondary-color*/
     --paper-slider-knob-color:    #FF4081;
     --paper-slider-pin-color:     #FF4081;
+
+    /* paper-toggle-button */
+    --paper-toggle-button-checked-bar-color:    #FF4081;
+    --paper-toggle-button-checked-button-color: #FF4081;
+    --paper-toggle-button-checked-ink-color:    #FF4081;
   }
 
   /* General styles */
@@ -84,7 +89,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   paper-menu iron-icon {
-    margin-right: 33px;
+    margin-right: 16px;
+    opacity: 0.54;
+  }
+
+  #viewMenu iron-icon {
+    margin-right: 0;
     opacity: 0.54;
   }
 
@@ -123,6 +133,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   paper-button[toggles][active] {
     background-color: rgba(255,255,255,0.12);
     /*opacity: 1;*/
+  }
+
+  paper-toggle-button {
+    margin-left: 4px;
+    margin-right: 20px;
   }
 
   /*paper-menu-button {

@@ -131,10 +131,13 @@
             <paper-button class="dropdown-trigger">View</paper-button>
             <paper-menu class="dropdown-content" id="viewMenu">
               <paper-item>
-                Zoom
-                <!--<iron-icon icon="zoom-out"></iron-icon>-->
-                <paper-slider class="bottom" min="10" max="250" value="67.5" pin disabled id="zoomSlider"></paper-slider>
-                <!--<iron-icon icon="zoom-in"></iron-icon>-->
+                <iron-icon icon="zoom-out"></iron-icon>
+                <paper-slider class="bottom" min="10" max="500" value="67.5" pin disabled id="zoomSlider"></paper-slider>
+                <iron-icon icon="zoom-in"></iron-icon>
+              </paper-item>
+              <paper-item>
+                <paper-toggle-button checked disabled id="showCaps"></paper-toggle-button>
+                Show keycaps
               </paper-item>
             </paper-menu>
           </paper-menu-button>

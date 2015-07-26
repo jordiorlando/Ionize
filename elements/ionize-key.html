@@ -19,6 +19,28 @@
       cursor: default;
     }
 
+    :host.selected {
+      z-index: 1;
+    }
+    :host.selected .switch {
+      border: 2px solid #666;
+    }
+    :host.selected .keyBG{
+      border: 2px solid #666;
+    }
+    :host.selected .keyMG{
+      border: 2px solid #888;
+    }
+    :host.selected.last .switch {
+      border: 2px solid #000;
+    }
+    :host.selected.last .keyBG{
+      border: 2px solid #000;
+    }
+    :host.selected.last .keyMG{
+      border: 2px solid #444 !important;
+    }
+
     iron-icon {
       position: absolute;
     }
@@ -27,13 +49,29 @@
       fill: #1dd7ff;
     }
 
+    .switch {
+      border: 1px solid #888;
+      z-index: 1;
+    }
+
+    .switch:hover {
+      border: 2px solid #888;
+    }
+
     .keyBG {
       display: flex;
       align-items: center;
       justify-content: center;
       border: 1px solid #888;
       background-color: #DDD;
-      opacity: 0.5;
+      z-index: 1;
+    }
+
+    .keyBG:hover {
+      border: 2px solid #888;
+    }
+    .keyBG:hover .keyMG {
+      border: 2px solid #BBB;
     }
 
     .keyMG {
@@ -53,33 +91,11 @@
     .keyName {
       text-align: center;
     }
-
-    .keyBG:hover {
-      border: 2px solid #888;
-    }
-    .keyBG:hover .keyMG {
-      border: 2px solid #BBB;
-    }
-
-    :host.selected {
-      z-index: 1;
-    }
-    :host.selected .keyBG{
-      border: 2px solid #666;
-    }
-    :host.selected .keyMG{
-      border: 2px solid #888;
-    }
-    :host.selected.last .keyBG{
-      border: 2px solid #000;
-    }
-    :host.selected.last .keyMG{
-      border: 2px solid #444 !important;
-    }
   </style>
 
   <template>
     <iron-icon icon="ionize-icons:switch-mx" class="mx-blue"></iron-icon>
+    <div class="switch"></div>
 
     <div class="keyBG">
       <div class="keyMG">
@@ -129,6 +145,11 @@
         observer: '_hChanged',
         type: Number,
         value: null
+      },
+      showCap: {
+        observer: '_showCapChanged',
+        type: Boolean,
+        value: true
       }
     },
 
@@ -143,6 +164,13 @@
     _unitSizeChanged: function() {
       this.querySelector('iron-icon').style.width = this.unitSize + 'px';
       this.querySelector('iron-icon').style.height = this.unitSize + 'px';
+
+      this.querySelector('.switch').style.width =
+        this.unitSize * 0.95 + 'px';
+      this.querySelector('.switch').style.height =
+        this.unitSize * 0.95 + 'px';
+      this.querySelector('.switch').style.borderRadius =
+        (this.unitSize / 10) + 'px';
 
       this.querySelector('.keyBG').style.borderRadius =
         (this.unitSize / 10) + 'px';
@@ -195,6 +223,16 @@
         (this.h * this.unitSize - this.unitSize * 20 / 75) + 'px';
       this.querySelector('.keyFG').style.height =
         (this.h * this.unitSize - this.unitSize * 20 / 75) + 'px';
+    },
+
+    _showCapChanged: function() {
+      if (this.showCap) {
+        this.querySelector('.keyBG').style.display = 'flex';
+        this.querySelector('.switch').style.display = 'none';
+      } else {
+        this.querySelector('.keyBG').style.display = 'none';
+        this.querySelector('.switch').style.display = 'block';
+      }
     }
   });
 </script>

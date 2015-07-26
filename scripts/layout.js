@@ -1,6 +1,5 @@
 var app = document.querySelector('#app');
 
-app.unitSize = 67.5; // Size in px of 1U
 app.stepSize = 0.25;
 var modified = true;
 var layoutWidthCurr = 15;
@@ -29,7 +28,6 @@ app.loadPreset = function() {
   var zoomSlider = document.querySelector('#zoomSlider');
   zoomSlider.removeAttribute('disabled');
   zoomSlider.addEventListener('immediate-value-change', function() {
-    app.unitSize = zoomSlider.immediateValue;
     updateLayout();
     resizeLayout();
   });
@@ -57,13 +55,14 @@ app.layoutAddKey = function() {
   };
 
   var container = document.querySelector('#layoutContainer');
+  var unitSize = document.querySelector('#zoomSlider').immediateValue;
   var numKeys = layout.keys.length;
   var lastKey = layout.keys[numKeys - 1];
   if ((lastKey.x + lastKey.w) > (layoutWidth() - 1)) {
     key.x = 0;
     key.y = lastKey.y + 1;
 
-    container.style.height = ((key.y + key.h) * app.unitSize) + 'px';
+    container.style.height = ((key.y + key.h) * unitSize) + 'px';
   } else {
     key.x = lastKey.x + lastKey.w;
     key.y = lastKey.y;
@@ -74,7 +73,7 @@ app.layoutAddKey = function() {
 
   var keySwitch = document.createElement('ionize-switch');
   keySwitch.id = 'switch_' + numKeys;
-  keySwitch.setAttribute('unit-size', app.unitSize);
+  keySwitch.setAttribute('unit-size', unitSize);
   keySwitch.setAttribute('x', key.x);
   keySwitch.setAttribute('y', key.y);
   container.appendChild(keySwitch);
@@ -267,7 +266,6 @@ var renderLayout = function() {
   container.id = 'layoutContainer';
   container.style.position = 'absolute';
   container.style.margin = '16px';
-  container.style.padding = (app.unitSize / 4) + 'px';
   container.setAttribute('elevation', 1);
 
   document.querySelector('#layout').appendChild(container);
@@ -313,10 +311,11 @@ var sortLayout = function() {
 
 var resizeLayout = function() {
   var container = document.querySelector('#layoutContainer');
+  var unitSize = document.querySelector('#zoomSlider').immediateValue;
 
-  container.style.padding = (app.unitSize / 4) + 'px';
-  container.style.width = (layoutWidth() * app.unitSize) + 'px';
-  container.style.height = (layoutHeight() * app.unitSize) + 'px';
+  container.style.padding = (unitSize / 4) + 'px';
+  container.style.width = (layoutWidth() * unitSize) + 'px';
+  container.style.height = (layoutHeight() * unitSize) + 'px';
 
   modified = false;
 };
@@ -346,12 +345,13 @@ var keyHTML = {};
 keyHTML.create = function(k) {
   var key = document.createElement('ionize-key');
   key.id = 'key_' + k;
-  key.setAttribute('unit-size', app.unitSize);
-  key.setAttribute('k', 'NEW<br>' + k);
-  key.setAttribute('x', 0);
-  key.setAttribute('y', 0);
-  key.setAttribute('w', 1);
-  key.setAttribute('h', 1);
+  key.unitSize = document.querySelector('#zoomSlider').immediateValue;
+  key.k = 'NEW<br>' + k;
+  key.x = 0;
+  key.y = 0;
+  key.w = 1;
+  key.h = 1;
+  key.showCap = document.querySelector('#showCaps').hasAttribute('checked');
 
   return key;
 };
@@ -359,12 +359,12 @@ keyHTML.create = function(k) {
 keyHTML.update = function(k) {
   var keyData = layout.keys[k];
   var key = document.querySelector('#key_' + k);
-  key.setAttribute('unit-size', app.unitSize);
-  key.setAttribute('k', keyData.k);
-  key.setAttribute('x', keyData.x);
-  key.setAttribute('y', keyData.y);
-  key.setAttribute('w', keyData.w);
-  key.setAttribute('h', keyData.h);
+  key.unitSize = document.querySelector('#zoomSlider').immediateValue;
+  key.k = keyData.k;
+  key.x = keyData.x;
+  key.y = keyData.y;
+  key.w = keyData.w;
+  key.h = keyData.h;
 };
 
 keyHTML.onTap = function(event) {

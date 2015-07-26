@@ -276,7 +276,7 @@ var renderLayout = function() {
     container.appendChild(keyHTML.create(k));
     keyHTML.update(k);
   }
-  container.addEventListener('click', keyHTML.onClick, false);
+  container.addEventListener('tap', keyHTML.onTap, false);
 
   resizeLayout();
 };
@@ -367,7 +367,7 @@ keyHTML.update = function(k) {
   key.setAttribute('h', keyData.h);
 };
 
-keyHTML.onClick = function(event) {
+keyHTML.onTap = function(event) {
   var key;
   if (document.querySelector('#showCaps').hasAttribute('checked')) {
     key = event.target.closest('.keyBG');

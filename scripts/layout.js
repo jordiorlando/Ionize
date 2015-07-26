@@ -1,6 +1,6 @@
 var app = document.querySelector('#app');
 
-app.unitSize = 100; // Size in px of 1U
+app.unitSize = 67.5; // Size in px of 1U
 app.stepSize = 0.25;
 var modified = true;
 var layoutWidthCurr = 15;

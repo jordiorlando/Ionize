@@ -39,7 +39,7 @@ app.layoutAddKey = function() {
   modified = true;
 
   var key = {
-    'k': null,
+    'k': '',
     'x': 0,
     'y': 0,
     'w': 1,
@@ -62,6 +62,13 @@ app.layoutAddKey = function() {
 
   //key.k = 'NEW<br>' + numKeys;
   layout.keys.push(key);
+
+  var keySwitch = document.createElement('ionize-switch');
+  keySwitch.id = 'switch_' + numKeys;
+  keySwitch.setAttribute('unit-size', app.unitSize);
+  keySwitch.setAttribute('x', key.x);
+  keySwitch.setAttribute('y', key.y);
+  container.appendChild(keySwitch);
 
   container.appendChild(keyHTML.create(numKeys));
   keyHTML.update(numKeys);

@@ -1,10 +1,10 @@
+<link rel="import" href="ionize-icons.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+
 <dom-module id="ionize-key">
   <style>
     :host {
       position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       z-index: 0;
 
       /* Disable highlighting/selecting text */
@@ -16,12 +16,23 @@
       cursor: default;
     }
 
+    iron-icon {
+      position: absolute;
+    }
+
+    .mx-blue {
+      fill: #1dd7ff;
+    }
+
     .keyBG {
+      position: absolute;
+      top: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       border: 1px solid #888;
       background-color: #DDD;
+      opacity: 0.5;
     }
 
     .keyMG {
@@ -67,6 +78,8 @@
   </style>
 
   <template>
+    <iron-icon icon="ionize-icons:switch-mx" class="mx-blue"></iron-icon>
+
     <div class="keyBG">
       <div class="keyMG">
         <div class="keyFG">
@@ -127,14 +140,17 @@
     },*/
 
     _unitSizeChanged: function() {
+      this.querySelector('iron-icon').style.width = this.unitSize + 'px';
+      this.querySelector('iron-icon').style.height = this.unitSize + 'px';
+
       this.querySelector('.keyBG').style.borderRadius =
-        (app.unitSize / 10) + 'px';
+        (this.unitSize / 10) + 'px';
       this.querySelector('.keyMG').style.borderRadius =
-        (app.unitSize / 10) + 'px';
+        (this.unitSize / 10) + 'px';
       this.querySelector('.keyFG').style.borderRadius =
-        (app.unitSize / 10) + 'px';
+        (this.unitSize / 10) + 'px';
       this.querySelector('.keyName').style.fontSize =
-        (app.unitSize / 5) + 'px';
+        (this.unitSize / 5) + 'px';
 
       this._xChanged();
       this._yChanged();
@@ -154,6 +170,10 @@
 
     _wChanged: function() {
       this.style.width = (this.w * this.unitSize) + 'px';
+
+      this.querySelector('iron-icon').style.left =
+        ((this.w - 1) / 2) * this.unitSize + 'px';
+
       this.querySelector('.keyBG').style.width =
         (this.w * this.unitSize - this.unitSize * 2.5 / 75) + 'px';
       this.querySelector('.keyMG').style.width =
@@ -164,6 +184,10 @@
 
     _hChanged: function() {
       this.style.height = (this.h * this.unitSize) + 'px';
+
+      this.querySelector('iron-icon').style.top =
+        ((this.h - 1) / 2) * this.unitSize + 'px';
+
       this.querySelector('.keyBG').style.height =
         (this.h * this.unitSize - this.unitSize * 2.5 / 75) + 'px';
       this.querySelector('.keyMG').style.height =

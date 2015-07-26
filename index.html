@@ -59,7 +59,7 @@
             </a>
           </paper-item>
           <!--TODO: make keyset editor-->
-          <paper-item>
+          <paper-item disabled>
             <a data-route="keyset" href="/keyset">
               <iron-icon icon="image:brush"></iron-icon>
               <span>Keyset</span>
@@ -77,22 +77,23 @@
           <paper-menu-button class="top" no-animations>
             <paper-button class="dropdown-trigger">File</paper-button>
             <paper-menu class="dropdown-content" id="fileMenu">
-              <paper-item>New</paper-item>
-              <paper-item>Open</paper-item>
-              <paper-item>
+              <paper-item disabled>New</paper-item>
+              <paper-item disabled>Open</paper-item>
+              <paper-item on-tap="loadPreset">
+                Open Preset
+              </paper-item>
+              <paper-item disabled>
                 <iron-icon icon="file-upload"></iron-icon>
                 Open JSON
               </paper-item>
-              <paper-item>DIVIDER</paper-item>
-              <paper-item>
+              <hr>
+              <paper-item disabled>
                 <iron-icon icon="save"></iron-icon>
                 Save
               </paper-item>
               <paper-item on-tap="saveLayout" disabled id="saveLayout">
-                <div class="paper-font-button">
-                  <iron-icon icon="file-download"></iron-icon>
-                  Save JSON
-                </div>
+                <iron-icon icon="file-download"></iron-icon>
+                Save JSON
               </paper-item>
             </paper-menu>
           </paper-menu-button>
@@ -101,15 +102,27 @@
           <paper-menu-button class="top" no-animations>
             <paper-button class="dropdown-trigger">Edit</paper-button>
             <paper-menu class="dropdown-content" id="editMenu">
-              <paper-item>
+              <paper-item disabled>
                 <iron-icon icon="undo"></iron-icon>
                 Undo
               </paper-item>
-              <paper-item>
+              <paper-item disabled>
                 <iron-icon icon="redo"></iron-icon>
                 Redo
               </paper-item>
-              <paper-item>DIVIDER</paper-item>
+              <hr>
+              <paper-item disabled>
+                <iron-icon icon="content-cut"></iron-icon>
+                Cut
+              </paper-item>
+              <paper-item disabled>
+                <iron-icon icon="content-copy"></iron-icon>
+                Copy
+              </paper-item>
+              <paper-item disabled>
+                <iron-icon icon="content-paste"></iron-icon>
+                Paste
+              </paper-item>
             </paper-menu>
           </paper-menu-button>
 
@@ -130,12 +143,9 @@
             <div class="layout horizontal" data-route="project"></div>
 
             <div class="layout horizontal center" data-route="layout">
-              <paper-button on-tap="loadPreset">
-                <div class="paper-font-button">
-                  <iron-icon icon="arrow-drop-down"></iron-icon>
-                  Load Preset
-                </div>
-              </paper-button>
+              <paper-input label="Key"></paper-input>
+              <paper-input pattern="[0-9]*" auto-validate label="Width"></paper-input>
+              <paper-input pattern="[0-9]*" auto-validate label="Height"></paper-input>
             </div>
 
             <div class="layout horizontal center" data-route="keyset">
@@ -260,12 +270,12 @@
               <paper-fab icon="add" on-tap="layoutAddKey" disabled id="layoutAddKey"></paper-fab>
             </div>
 
+            <div data-route="keymap"></div>
+
             <div data-route="keyset">
               <paper-fab mini icon="delete" on-tap="keysetDeleteKey" disabled id="keysetDeleteKey"></paper-fab>
               <paper-fab icon="add" on-tap="keysetAddKey" id="keysetAddKey"></paper-fab>
             </div>
-
-            <div data-route="keymap"></div>
           </iron-pages>
         </div>
       </paper-header-panel>

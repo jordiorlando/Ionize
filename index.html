@@ -75,8 +75,7 @@
         <paper-toolbar class="medium-tall" id="mainToolbar">
           <paper-icon-button class="top" id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
 
-          <!--TODO: remove no-animation-->
-          <paper-menu-button class="top" no-animations>
+          <paper-menu-button class="top">
             <paper-button class="dropdown-trigger">File</paper-button>
             <paper-menu class="dropdown-content theme-light" id="fileMenu">
               <paper-item disabled>New</paper-item>
@@ -100,8 +99,7 @@
             </paper-menu>
           </paper-menu-button>
 
-          <!--TODO: remove no-animation-->
-          <paper-menu-button class="top" no-animations>
+          <paper-menu-button class="top">
             <paper-button class="dropdown-trigger">Edit</paper-button>
             <paper-menu class="dropdown-content theme-light" id="editMenu">
               <paper-item disabled>
@@ -128,8 +126,7 @@
             </paper-menu>
           </paper-menu-button>
 
-          <!--TODO: remove no-animation-->
-          <paper-menu-button class="top" no-animations>
+          <paper-menu-button class="top">
             <paper-button class="dropdown-trigger">View</paper-button>
             <paper-menu class="dropdown-content theme-light" id="viewMenu">
               <paper-item>
@@ -167,8 +164,7 @@
 
               <div class="divider-vert"></div>
 
-              <!--TODO: remove no-animation-->
-              <!--<paper-menu-button no-animations id="fontDropdown">
+              <!--<paper-menu-button id="fontDropdown">
                 <div class="dropdown-trigger layout horizontal center">
                   <paper-input pattern="[a-z][A-Z]*" auto-validate label="Roboto" no-label-float></paper-input>
                   <iron-icon icon="arrow-drop-down"></iron-icon>
@@ -180,7 +176,7 @@
 
               <div class="divider-vert"></div>
 
-              <paper-menu-button no-animations id="fontSizeDropdown">
+              <paper-menu-button id="fontSizeDropdown">
                 <div class="dropdown-trigger layout horizontal center">
                   <paper-input pattern="[0-9]*" auto-validate label="12" no-label-float id="fontSizeInput"></paper-input>
                   <iron-icon icon="arrow-drop-down"></iron-icon>
@@ -214,7 +210,7 @@
               <paper-button toggles>
                 <iron-icon icon="editor:format-underlined"></iron-icon>
               </paper-button>
-              <paper-menu-button no-animations> <!--TODO: remove no-animation-->
+              <paper-menu-button>
                 <paper-button class="dropdown-trigger">
                   <iron-icon icon="editor:format-color-text"></iron-icon>
                   <iron-icon icon="arrow-drop-down"></iron-icon>

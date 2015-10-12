@@ -80,9 +80,19 @@
             <paper-menu class="dropdown-content theme-light" id="fileMenu">
               <paper-item disabled>New</paper-item>
               <paper-item disabled>Open</paper-item>
-              <paper-item on-tap="loadPreset">
-                Open Preset
-              </paper-item>
+              <paper-submenu>
+                <paper-item class="menu-trigger">
+                  Open Preset
+                </paper-item>
+                <paper-menu class="menu-content sublist">
+                  <paper-item on-tap="loadPreset" file="60.json">
+                    Standard 60%
+                  </paper-item>
+                  <paper-item on-tap="loadPreset" file="ION-60.json">
+                    ION-60
+                  </paper-item>
+                </paper-menu>
+              </paper-submenu>
               <paper-item disabled>
                 <iron-icon icon="file-upload"></iron-icon>
                 Open JSON

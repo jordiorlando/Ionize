@@ -15,8 +15,9 @@ app.loadLayout = function() {
 
 };
 
-app.loadPreset = function() {
-  $.getJSON('../presets/layouts/60.json', function( data ) {
+app.loadPreset = function(e) {
+  $.getJSON('../presets/layouts/' + e.target.getAttribute('file'),
+            function( data ) {
     layout = data;
     renderLayout();
     resizeLayout();

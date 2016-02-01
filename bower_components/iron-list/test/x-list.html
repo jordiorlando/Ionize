@@ -33,13 +33,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     .item:nth-child(even) {
       background-color: red;
     }
+
+    iron-list {
+      overflow: hidden;
+    }
   </style>
 
   <template>
     <iron-list style$="[[_computedListHeight(listHeight)]]" items="[[data]]" as="item" id="list">
       <template>
         <div class="item">
-          <div style$="[[_computedItemHeight()]]">[[item.index]]</div>
+          <div style$="[[_computedItemHeight(item)]]" tabindex$="[[tabIndex]]">[[_getItemValue(item, item.*, itemProp)]]</div>
         </div>
       </template>
     </iron-list>
@@ -68,6 +72,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       pre: {
         type: Boolean
+      },
+
+      itemProp: {
+        value: 'index',
+        type: String
       }
     },
 
@@ -75,15 +84,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       return this.$.list;
     },
 
-    _computedItemHeight: function() {
-      var css = '';
-      css += this.itemHeight === 0 ? '' : 'height: ' + (this.itemHeight) + 'px;';
-      css += this.pre ? 'white-space:pre;' : '';
+    _computedItemHeight: function(item) {
+      var css = this.pre ? 'white-space:pre;' : '';
+      if (item.height) {
+        css += this.itemHeight === 0 ? '' : 'height: ' + (item.height) + 'px;';
+      } else if (this.itemHeight) {
+        css += 'height: ' + (this.itemHeight) + 'px;';
+      }
       return css;
     },
 
     _computedListHeight: function(listHeight) {
-      return 'height: ' + (listHeight) + 'px';
+      return 'height: ' + (listHeight) + 'px;';
+    },
+
+    _getItemValue: function(item) {
+      return this.itemProp === '' ? item : item[this.itemProp];
     }
   });
 </script>

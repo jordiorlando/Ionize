@@ -12,9 +12,9 @@ thing! https://github.com/PolymerLabs/tedium/issues
 
 -->
 
-[![Build Status](https://travis-ci.org/PolymerElements/paper-dialog-behavior.svg?branch=master)](https://travis-ci.org/PolymerElements/paper-dialog-behavior)
+[![Build status](https://travis-ci.org/PolymerElements/paper-dialog-behavior.svg?branch=master)](https://travis-ci.org/PolymerElements/paper-dialog-behavior)
 
-_[Demo and API Docs](https://elements.polymer-project.org/elements/paper-dialog-behavior)_
+_[Demo and API docs](https://elements.polymer-project.org/elements/paper-dialog-behavior)_
 
 
 ##Polymer.PaperDialogBehavior
@@ -62,7 +62,5 @@ to override this attribute with `role="alertdialog"`.
 
 If `modal` is set, the element will set `aria-modal` and prevent the focus from exiting the element.
 It will also ensure that focus remains in the dialog.
-
-The `aria-labelledby` attribute will be set to the header element, if one exists.
 
 

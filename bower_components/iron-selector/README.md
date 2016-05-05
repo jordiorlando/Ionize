@@ -12,9 +12,9 @@ thing! https://github.com/PolymerLabs/tedium/issues
 
 -->
 
-[![Build Status](https://travis-ci.org/PolymerElements/iron-selector.svg?branch=master)](https://travis-ci.org/PolymerElements/iron-selector)
+[![Build status](https://travis-ci.org/PolymerElements/iron-selector.svg?branch=master)](https://travis-ci.org/PolymerElements/iron-selector)
 
-_[Demo and API Docs](https://elements.polymer-project.org/elements/iron-selector)_
+_[Demo and API docs](https://elements.polymer-project.org/elements/iron-selector)_
 
 
 ##&lt;iron-selector&gt;
@@ -46,6 +46,22 @@ _[Demo and API Docs](https://elements.polymer-project.org/elements/iron-selector
     <div name="zot">Zot</div>
   </iron-selector>
 ```
+
+  If no matching element is found using `attForSelected`, use `fallbackSelection` as fallback.
+
+  Example:
+
+```html
+    <iron-selector attr-for-selected="name" selected="non-existing"
+                   fallback-selection="default">
+      <div name="foo">Foo</div>
+      <div name="bar">Bar</div>
+      <div name="default">Default</div>
+    </iron-selector>
+```
+
+  Note: When the selector is multi, the selection will set to `fallbackSelection` iff
+  the number of matching elements is zero.
 
   `iron-selector` is not styled. Use the `iron-selected` CSS class to style the selected element.
 

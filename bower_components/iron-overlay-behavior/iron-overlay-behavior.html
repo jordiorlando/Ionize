@@ -22,9 +22,12 @@ Use `Polymer.IronOverlayBehavior` to implement an element that can be hidden or 
 on top of other content. It includes an optional backdrop, and can be used to implement a variety
 of UI controls including dialogs and drop downs. Multiple overlays may be displayed at once.
 
+See the [demo source code](https://github.com/PolymerElements/iron-overlay-behavior/blob/master/demo/simple-overlay.html)
+for an example.
+
 ### Closing and canceling
 
-A dialog may be hidden by closing or canceling. The difference between close and cancel is user
+An overlay may be hidden by closing or canceling. The difference between close and cancel is user
 intent. Closing generally implies that the user acknowledged the content on the overlay. By default,
 it will cancel whenever the user taps outside it or presses the escape key. This behavior is
 configurable with the `no-cancel-on-esc-key` and the `no-cancel-on-outside-click` properties.
@@ -42,6 +45,10 @@ position and size it manually using CSS. See `Polymer.IronFitBehavior`.
 Set the `with-backdrop` attribute to display a backdrop behind the overlay. The backdrop is
 appended to `<body>` and is of type `<iron-overlay-backdrop>`. See its doc page for styling
 options.
+
+In addition, `with-backdrop` will wrap the focus within the content in the light DOM.
+Override the [`_focusableNodes` getter](#Polymer.IronOverlayBehavior:property-_focusableNodes)
+to achieve a different behavior.
 
 ### Limitations
 
@@ -78,7 +85,8 @@ context. You should place this element as a child of `<body>` whenever possible.
       },
 
       /**
-       * Set to true to display a backdrop behind the overlay.
+       * Set to true to display a backdrop behind the overlay. It traps the focus
+       * within the light DOM of the overlay.
        */
       withBackdrop: {
         observer: '_withBackdropChanged',
@@ -316,10 +324,15 @@ context. You should place this element as a child of `<body>` whenever possible.
         return;
       }
 
-      this._manager.addOrRemoveOverlay(this);
-
       if (this.__openChangedAsync) {
         window.cancelAnimationFrame(this.__openChangedAsync);
+      }
+
+      // Synchronously remove the overlay.
+      // The adding is done asynchronously to go out of the scope of the event
+      // which might have generated the opening.
+      if (!this.opened) {
+        this._manager.removeOverlay(this);
       }
 
       // Defer any animation-related code on attached
@@ -330,16 +343,19 @@ context. You should place this element as a child of `<body>` whenever possible.
 
       this.__isAnimating = true;
 
-      if (this.opened) {
-        // requestAnimationFrame for non-blocking rendering
-        this.__openChangedAsync = window.requestAnimationFrame(function() {
-          this.__openChangedAsync = null;
+      // requestAnimationFrame for non-blocking rendering
+      this.__openChangedAsync = window.requestAnimationFrame(function() {
+        this.__openChangedAsync = null;
+        if (this.opened) {
+          this._manager.addOverlay(this);
           this._prepareRenderOpened();
           this._renderOpened();
-        }.bind(this));
-      } else {
-        this._renderClosed();
-      }
+        } else {
+          // Move the focus before actually closing.
+          this._applyFocus();
+          this._renderClosed();
+        }
+      }.bind(this));
     },
 
     _canceledChanged: function() {
@@ -356,7 +372,7 @@ context. You should place this element as a child of `<body>` whenever possible.
         this.removeAttribute('tabindex');
         this.__shouldRemoveTabIndex = false;
       }
-      if (this.opened) {
+      if (this.opened && this.isAttached) {
         this._manager.trackBackdrop();
       }
     },
@@ -372,6 +388,9 @@ context. You should place this element as a child of `<body>` whenever possible.
       this._preparePositioning();
       this.refit();
       this._finishPositioning();
+
+      // Move the focus to the child node with [autofocus].
+      this._applyFocus();
 
       // Safari will apply the focus to the autofocus element when displayed for the first time,
       // so we blur it. Later, _applyFocus will set the focus if necessary.
@@ -401,11 +420,15 @@ context. You should place this element as a child of `<body>` whenever possible.
      * @protected
      */
     _finishRenderOpened: function() {
-      // Focus the child node with [autofocus]
-      this._applyFocus();
 
       this.notifyResize();
       this.__isAnimating = false;
+
+      // Store it so we don't query too much.
+      var focusableNodes = this._focusableNodes;
+      this.__firstFocusableNode = focusableNodes[0];
+      this.__lastFocusableNode = focusableNodes[focusableNodes.length - 1];
+
       this.fire('iron-overlay-opened');
     },
 
@@ -418,8 +441,6 @@ context. You should place this element as a child of `<body>` whenever possible.
       this.style.display = 'none';
       // Reset z-index only at the end of the animation.
       this.style.zIndex = '';
-
-      this._applyFocus();
 
       this.notifyResize();
       this.__isAnimating = false;
@@ -510,15 +531,45 @@ context. You should place this element as a child of `<body>` whenever possible.
      * @protected
      */
     _onCaptureTab: function(event) {
+      if (!this.withBackdrop) {
+        return;
+      }
       // TAB wraps from last to first focusable.
       // Shift + TAB wraps from first to last focusable.
       var shift = event.shiftKey;
       var nodeToCheck = shift ? this.__firstFocusableNode : this.__lastFocusableNode;
       var nodeToSet = shift ? this.__lastFocusableNode : this.__firstFocusableNode;
-      if (this.withBackdrop && this._focusedChild === nodeToCheck) {
-        // We set here the _focusedChild so that _onCaptureFocus will handle the
-        // wrapping of the focus (the next event after tab is focus).
+      var shouldWrap = false;
+      if (nodeToCheck === nodeToSet) {
+        // If nodeToCheck is the same as nodeToSet, it means we have an overlay
+        // with 0 or 1 focusables; in either case we still need to trap the
+        // focus within the overlay.
+        shouldWrap = true;
+      } else {
+        // In dom=shadow, the manager will receive focus changes on the main
+        // root but not the ones within other shadow roots, so we can't rely on
+        // _focusedChild, but we should check the deepest active element.
+        var focusedNode = this._manager.deepActiveElement;
+        // If the active element is not the nodeToCheck but the overlay itself,
+        // it means the focus is about to go outside the overlay, hence we
+        // should prevent that (e.g. user opens the overlay and hit Shift+TAB).
+        shouldWrap = (focusedNode === nodeToCheck || focusedNode === this);
+      }
+
+      if (shouldWrap) {
+        // When the overlay contains the last focusable element of the document
+        // and it's already focused, pressing TAB would move the focus outside
+        // the document (e.g. to the browser search bar). Similarly, when the
+        // overlay contains the first focusable element of the document and it's
+        // already focused, pressing Shift+TAB would move the focus outside the
+        // document (e.g. to the browser search bar).
+        // In both cases, we would not receive a focus event, but only a blur.
+        // In order to achieve focus wrapping, we prevent this TAB event and
+        // force the focus. This will also prevent the focus to temporarily move
+        // outside the overlay, which might cause scrolling.
+        event.preventDefault();
         this._focusedChild = nodeToSet;
+        this._applyFocus();
       }
     },
 
@@ -548,10 +599,6 @@ context. You should place this element as a child of `<body>` whenever possible.
       if (this.opened && !this.__isAnimating) {
         this.notifyResize();
       }
-      // Store it so we don't query too much.
-      var focusableNodes = this._focusableNodes;
-      this.__firstFocusableNode = focusableNodes[0];
-      this.__lastFocusableNode = focusableNodes[focusableNodes.length - 1];
     }
   };
 
